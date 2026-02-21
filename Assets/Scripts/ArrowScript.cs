@@ -6,6 +6,8 @@ public class ArrowScript : MonoBehaviour
 
     public void Init(Vector2 position, float rotationDegrees, int sceneToCall)
     {
+        Debug.Log($"Arrow spawned at {transform.position} rot={rotationDegrees} sceneToCall={sceneToCall}");
+
         SceneToCall = sceneToCall;
 
         transform.position = new Vector3(position.x, position.y, transform.position.z);        // Hier wende ich die Parameter an (hier die pos)

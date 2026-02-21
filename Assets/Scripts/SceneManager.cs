@@ -7,11 +7,15 @@ public class SceneManager : MonoBehaviour
 
     [Header("Spawners")]
     [SerializeField] private ArrowSpawner arrowSpawner;
+    [SerializeField] private DoorSpawner doorSpawner;
 
     [Header("Scene Data Library")]
     [SerializeField] private List<SceneData> scenes = new List<SceneData>();
 
     private readonly List<ArrowScript> arrows = new List<ArrowScript>();
+
+    private readonly Dictionary<string, bool> doorOpenState = new Dictionary<string, bool>();
+
     private int currentSceneId = -1;
 
     private void Awake()
@@ -46,41 +50,56 @@ public class SceneManager : MonoBehaviour
     public void ChangeScene(int sc)
     {
         
-        for (int i = 0; i < arrows.Count; i++)
-        {                                                                                        //Clear arrows
-            if (arrows[i] != null)
-                Destroy(arrows[i].gameObject);
-        }
-        arrows.Clear();
-
-        
-        SceneData data = GetSceneData(sc);                                                      //get data
-        if (data == null)
+        SceneData data = GetSceneData(sc);                                                             //Daten werden abgerufen
+        if (data == null)                                                                              
         {
-            Debug.LogError($"No SceneData found for sceneId={sc}. Create one and add it to SceneManager.scenes.");
+            Debug.LogError($"No SceneData found for sceneId={sc}.");
             return;
         }
 
         currentSceneId = sc;
 
         
-        if (arrowSpawner == null)
+        if (doorSpawner != null)
+            doorSpawner.DestroyAllSpawned();                                                          //alte doors weg
+
+        
+        for (int i = 0; i < arrows.Count; i++)
+        {                                                                                            //alte arrows weg
+            if (arrows[i] != null)
+                Destroy(arrows[i].gameObject);
+        }
+        arrows.Clear();
+
+
+        
+        if (doorSpawner == null)
         {
+            Debug.LogError("DoorSpawner not assigned in SceneManager.");                                
+            return;
+        }
+
+        foreach (var d in data.doors)
+        {                                                                                                //Spawnt doors
+            bool isOpen = GetDoorIsOpen(d.id, d.startsOpen);
+            doorSpawner.CreateDoor(d, isOpen);
+        }
+
+    
+        if (arrowSpawner == null)
+        {                                                                                                 
             Debug.LogError("ArrowSpawner not assigned in SceneManager.");
             return;
         }
 
-        foreach (var a in data.arrows)                                                        //spawn the arrows
+        foreach (var a in data.arrows)                                                                      //Spawnt arrows
         {
             arrowSpawner.createArrow(a.position.x, a.position.y, a.rotationDegrees, a.sceneToCall);
         }
 
-        
-        // SpawnChests(data.chests);
-        // SpawnDoors(data.doors);
-
         Debug.Log($"Loaded scene data: {data.displayName} (id={data.sceneId})");
     }
+
 
     private SceneData GetSceneData(int id)
     {
@@ -91,4 +110,30 @@ public class SceneManager : MonoBehaviour
         }
         return null;
     }
+
+    public bool GetDoorIsOpen(string doorId, bool fallback)
+    {
+        if (doorOpenState.TryGetValue(doorId, out bool open))
+            return open;
+        return fallback;
+    }
+                   
+    public void SetDoorOpen(string doorId, bool open)
+    {
+        doorOpenState[doorId] = open;                                                                    //irgendwann muss das gespeichert werden
+        
+    }
+
+    public ArrowScript SpawnArrowOnDoor(Transform doorTransform, int nextSceneId, float rotationDeg)
+    {
+        if (arrowSpawner == null)
+        {
+            Debug.LogError("SpawnArrowOnDoor failed: ArrowSpawner not assigned in SceneManager.");
+            return null;
+        }
+
+        Vector3 p = doorTransform.position + Vector3.up;                   
+        return arrowSpawner.createArrow(p.x, p.y, rotationDeg, nextSceneId);
+    }
+
 }

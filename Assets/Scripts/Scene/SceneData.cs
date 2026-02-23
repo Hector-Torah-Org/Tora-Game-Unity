@@ -8,12 +8,11 @@ public class SceneData : ScriptableObject
     public int sceneId;
     public string displayName;
 
-    [Header("Arrows")]
+    [Header("Components")]
     public List<ArrowSpawnData> arrows = new List<ArrowSpawnData>();
     public List<DoorSpawnData> doors = new List<DoorSpawnData>();
-    [Header("Placeholders (later)")]
     public List<ChestSpawnData> chests = new List<ChestSpawnData>();
-    
+
 }
 
 [Serializable]
@@ -27,9 +26,13 @@ public class ArrowSpawnData
 
 [Serializable]
 public class ChestSpawnData
-{                                                                          //Placeholder, also ignorieren für den moment
+{
+    public string id;                 
     public Vector2 position;
-    public int chestTypeId;
+    public Vector2 scale;
+    public bool startsOpen;
+
+    public List<ItemStack> contents = new List<ItemStack>();
 }
 
 [Serializable]

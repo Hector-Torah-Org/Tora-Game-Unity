@@ -2,15 +2,20 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using System.Text;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 public class ApiConnection : MonoBehaviour
 {
-    private const string rootUrl = "http://localhost:8080/players";
+    private const string rootUrl = "http://localhost:8080";
     public string sessionId;
 
+
+    //Player Actions
     public IEnumerator CreatePlayer(string firstName, string lastName, string userName,
         System.Action<PlayerResponseDTO> onSuccess, System.Action<string> onError)
     {
+        Debug.Log($"Creating player with firstName: {firstName}, lastName: {lastName}, userName: {userName}");
         PlayerCreationDTO dto = new PlayerCreationDTO
         {
             firstName = firstName,
@@ -19,14 +24,17 @@ public class ApiConnection : MonoBehaviour
         };
 
         string json = JsonUtility.ToJson(dto);
+        string url = rootUrl + "/players";
 
-        UnityWebRequest request = new UnityWebRequest(rootUrl, "POST");
+        UnityWebRequest request = new UnityWebRequest(url, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
 
+        Debug.Log("Sending player creation request with body: " + json);
         yield return request.SendWebRequest();
+        Debug.Log("Received response: " + request.downloadHandler.text);
 
         HandleResponse(request, onSuccess, onError);
 
@@ -35,7 +43,7 @@ public class ApiConnection : MonoBehaviour
     public IEnumerator SessionLogin(string firstName, string lastName, string userName,
         System.Action<LoginResponseDTO> onSuccess, System.Action<string> onError)
     {
-        string url = rootUrl + $"/{firstName}/{lastName}/{userName}";
+        string url = rootUrl + $"/players/{firstName}/{lastName}/{userName}";
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
 
@@ -49,7 +57,7 @@ public class ApiConnection : MonoBehaviour
 
     public IEnumerator UpdatePlayer(string newFirstName, string newLastName, string newUserName, System.Action<PlayerResponseDTO> onSuccess, System.Action<string> onError)
     {
-        string url = rootUrl + "/" + sessionId;
+        string url = rootUrl + "/players/" + sessionId;
         PlayerCreationDTO updatedPlayerDto = new PlayerCreationDTO() { 
             firstName = newFirstName,
             lastName = newLastName,
@@ -67,9 +75,39 @@ public class ApiConnection : MonoBehaviour
 
     public IEnumerator UpdateGameState(string gamestate)
     {
-        string url = rootUrl + "/" + sessionId;
+        string url = rootUrl + "/players/" + sessionId;
         string gameStateJson = JsonUtility.ToJson(gamestate);
         byte[] body = Encoding .UTF8.GetBytes(gameStateJson);
+
+        UnityWebRequest request = new UnityWebRequest(url, "POST");
+        request.uploadHandler = new UploadHandlerRaw(body);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        HandleResponse<string>(request, result => Debug.Log(result), error => Debug.LogError(error));
+    }
+
+    //Image actions
+
+    public IEnumerator GetImage(System.Action<ImageResponseDTO> onSuccess)
+    {
+        string url = rootUrl + "/image/" + sessionId;
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
+        HandleResponse(request, onSuccess, error => Debug.LogError(error));
+    }
+
+    public IEnumerator SendClassifications(List<Classification> classifications)
+    {
+        string url = rootUrl + "/image/" + sessionId;
+        Debug.Log("Classifications: " + classifications[1]);
+        ClassificationSendDTO classificationsDto = new ClassificationSendDTO() { classifications = classifications };
+        string classificationsJson = JsonUtility.ToJson(classificationsDto);
+        classificationsJson = classificationsJson.Replace("{\"classifications\":", "").TrimEnd('}');
+        Debug.Log("Sending classifications: " + classificationsJson);
+        byte[] body = Encoding.UTF8.GetBytes(classificationsJson);
 
         UnityWebRequest request = new UnityWebRequest(url, "POST");
         request.uploadHandler = new UploadHandlerRaw(body);

@@ -615,6 +615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e2f5470f9a2b146b2ebd247b5464eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sessionId: 
 --- !u!114 &810143034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,7 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76ef91d151253694abaf6a2c4750f593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerApiConnection: {fileID: 810143033}
+  apiConnection: {fileID: 810143033}
 --- !u!4 &810143035
 Transform:
   m_ObjectHideFlags: 0

@@ -91,9 +91,9 @@ public class ApiConnection : MonoBehaviour
 
     //Image actions
 
-    public IEnumerator GetImage(System.Action<ImageResponseDTO> onSuccess)
+    public IEnumerator GetImage(int amount, System.Action<ImageResponseListDTO> onSuccess)
     {
-        string url = rootUrl + "/image/" + sessionId;
+        string url = rootUrl + "/image/" + sessionId + "/" + amount;
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
         HandleResponse(request, onSuccess, error => Debug.LogError(error));

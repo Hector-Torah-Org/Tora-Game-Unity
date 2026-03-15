@@ -37,23 +37,24 @@ public class ApiTester : MonoBehaviour
 
         //Image erhalten
         List<string> imageIds = new List<string>();
-        yield return StartCoroutine(apiConnection.GetImage(response =>
+        yield return StartCoroutine(apiConnection.GetImage(4, response =>
         {
-            Debug.Log("Received image with id: " + response.id + ", link: " + response.link + ", character: " + response.character);
-            imageIds.Add(response.id);
+            foreach (var image in response.images)
+            {
+                Debug.Log("Received image with id: " + image.id + ", link: " + image.link + ", character: " + image.character);
+                imageIds.Add(image.id);
+            }
         }));
 
-        yield return StartCoroutine(apiConnection.GetImage(response =>
-        {
-            Debug.Log("Received image with id: " + response.id + ", link: " + response.link + ", character: " + response.character);
-            imageIds.Add(response.id);
-        }));
+        
 
         //Klassificationen senden
         yield return StartCoroutine(apiConnection.SendClassifications(new List<Classification>
         {
             new Classification() { imageId = imageIds[0], isDecorated = true },
-            new Classification() { imageId = imageIds[1], isDecorated = false }
+            new Classification() { imageId = imageIds[1], isDecorated = false },
+            new Classification() { imageId = imageIds[2], isDecorated = true },
+            new Classification() { imageId = imageIds[3], isDecorated = false }
         }));
 
 

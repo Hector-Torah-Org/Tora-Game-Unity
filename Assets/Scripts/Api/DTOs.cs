@@ -24,11 +24,18 @@ public class PlayerResponseDTO
     public string gamestate;
 }
 
-public class ImageResponseDTO
+[Serializable]
+public class ImageResponseListDTO
 {
-    public string id;
-    public string link;
-    public string character;
+    public List<ImageResponseDTO> images;
+
+    [Serializable]
+    public class ImageResponseDTO
+    {
+        public string id;
+        public string link;
+        public string character;
+    }
 }
 
 [Serializable]

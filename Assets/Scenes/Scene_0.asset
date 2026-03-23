@@ -38,7 +38,7 @@ MonoBehaviour:
   - id: chest_0_A
     position: {x: 3, y: 0}
     scale: {x: 1, y: 1}
-    startsOpen: 1
+    startsOpen: 0
     contents:
     - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
       amount: 1

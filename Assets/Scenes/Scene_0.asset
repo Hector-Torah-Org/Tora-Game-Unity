@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: 
   backgrounds:
   - id: background_0_A
-    sprite: {fileID: 0}
+    sprite: {fileID: -7328356432364208890, guid: 299ad5d543ce008418f3d1c7727b02c9, type: 3}
   defaultBackgroundIndex: 0
   arrows:
   - position: {x: 0, y: 4}

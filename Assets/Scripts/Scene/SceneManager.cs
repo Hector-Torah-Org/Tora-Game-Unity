@@ -10,6 +10,9 @@ public class SceneManager : MonoBehaviour
     [SerializeField] private DoorSpawner doorSpawner;
     [SerializeField] private ChestSpawner chestSpawner;
 
+    [Header("Background")]
+    [SerializeField] private SpriteRenderer backgroundRenderer;
+
     [Header("Scene Data Library")]
     [SerializeField] private List<SceneData> scenes = new List<SceneData>();
 
@@ -19,7 +22,11 @@ public class SceneManager : MonoBehaviour
     private readonly Dictionary<string, bool> chestOpenState = new Dictionary<string, bool>();
     private readonly Dictionary<string, List<ItemStack>> chestContentsState = new Dictionary<string, List<ItemStack>>();
 
+    private readonly Dictionary<int, int> sceneBackgroundState = new Dictionary<int, int>();
+
     private int currentSceneId = -1;
+
+    public bool IsUIBlockingWorldInput { get; private set; }
 
     private void Awake()
     {
@@ -63,13 +70,15 @@ public class SceneManager : MonoBehaviour
         arrows.Clear();
 
         SceneData data = GetSceneData(sc);                                                             //Daten werden abgerufen
-        if (data == null)                                                                              
+        if (data == null)
         {
             Debug.LogError($"No SceneData found for sceneId={sc}.");
             return;
         }
 
         currentSceneId = sc;
+
+        ApplySceneBackground(data);                                                                   // <<< NEU: Background setzen
 
         if (chestSpawner == null)
         {
@@ -84,11 +93,9 @@ public class SceneManager : MonoBehaviour
             chestSpawner.CreateChest(c, isOpen, contents);
         }
 
-
         if (doorSpawner != null)
             doorSpawner.DestroyAllSpawned();                                                          //alte doors weg
 
-        
         for (int i = 0; i < arrows.Count; i++)
         {                                                                                            //alte arrows weg
             if (arrows[i] != null)
@@ -96,35 +103,31 @@ public class SceneManager : MonoBehaviour
         }
         arrows.Clear();
 
-
-        
         if (doorSpawner == null)
         {
-            Debug.LogError("DoorSpawner not assigned in SceneManager.");                                
+            Debug.LogError("DoorSpawner not assigned in SceneManager.");
             return;
         }
-                                                
+
         foreach (var d in data.doors)
-        {                                                                                                //Spawnt doors
+        {                                                                                            //Spawnt doors
             bool isOpen = GetDoorIsOpen(d.id, d.startsOpen);
             doorSpawner.CreateDoor(d, isOpen);
         }
 
-    
         if (arrowSpawner == null)
-        {                                                                                                 
+        {
             Debug.LogError("ArrowSpawner not assigned in SceneManager.");
             return;
         }
 
         foreach (var a in data.arrows)                                                                      //Spawnt arrows
         {
-            arrowSpawner.createArrow(a.position.x, a.position.y, a.rotationDegrees, a.sceneToCall);
+            arrowSpawner.createArrow(a.position.x, a.position.y, a.rotationDegrees, a.sceneToCall, a.scale);
         }
 
         Debug.Log($"Loaded scene data: {data.displayName} (id={data.sceneId})");
     }
-
 
     private SceneData GetSceneData(int id)
     {
@@ -134,6 +137,83 @@ public class SceneManager : MonoBehaviour
                 return scenes[i];
         }
         return null;
+    }
+
+    private void ApplySceneBackground(SceneData data)
+    {
+        if (backgroundRenderer == null)
+        {
+            Debug.LogError("BackgroundRenderer not assigned in SceneManager.");
+            return;
+        }
+
+        if (data == null || data.backgrounds == null || data.backgrounds.Count == 0)
+        {
+            backgroundRenderer.sprite = null;
+            return;
+        }
+
+        int index = GetSceneBackgroundIndex(data.sceneId, data.defaultBackgroundIndex);
+
+        if (index < 0 || index >= data.backgrounds.Count)
+            index = 0;
+
+        BackgroundOption option = data.backgrounds[index];
+
+        if (option == null || option.sprite == null)
+        {
+            Debug.LogWarning($"Scene {data.sceneId} background at index {index} is missing a sprite.");
+            backgroundRenderer.sprite = null;
+            return;
+        }
+
+        backgroundRenderer.sprite = option.sprite;
+    }
+
+    public int GetSceneBackgroundIndex(int sceneId, int fallback)
+    {
+        if (sceneBackgroundState.TryGetValue(sceneId, out int index))
+            return index;
+
+        return fallback;
+    }
+
+    public void SetSceneBackgroundIndex(int sceneId, int index)
+    {
+        SceneData data = GetSceneData(sceneId);
+        if (data == null)
+        {
+            Debug.LogError($"SetSceneBackgroundIndex failed: no SceneData for sceneId={sceneId}");
+            return;
+        }
+
+        if (data.backgrounds == null || data.backgrounds.Count == 0)
+        {
+            Debug.LogWarning($"Scene {sceneId} has no background options.");
+            return;
+        }
+
+        if (index < 0 || index >= data.backgrounds.Count)
+        {
+            Debug.LogError($"SetSceneBackgroundIndex failed: index {index} is out of range for scene {sceneId}");
+            return;
+        }
+
+        sceneBackgroundState[sceneId] = index;
+
+        if (sceneId == currentSceneId)
+            ApplySceneBackground(data);
+    }
+
+    public void SetCurrentSceneBackgroundIndex(int index)
+    {
+        if (currentSceneId < 0)
+        {
+            Debug.LogWarning("SetCurrentSceneBackgroundIndex failed: no current scene is active.");
+            return;
+        }
+
+        SetSceneBackgroundIndex(currentSceneId, index);
     }
 
     public bool GetChestIsOpen(string chestId, bool fallback)
@@ -173,14 +253,13 @@ public class SceneManager : MonoBehaviour
             return open;
         return fallback;
     }
-                   
+
     public void SetDoorOpen(string doorId, bool open)
     {
-        doorOpenState[doorId] = open;                                                                    //irgendwann muss das gespeichert werden
-        
+        doorOpenState[doorId] = open;                                                                //irgendwann muss das gespeichert werden
     }
 
-    public ArrowScript SpawnArrowOnDoor(Transform doorTransform, int nextSceneId, float rotationDeg)
+    public ArrowScript SpawnArrowOnDoor(Transform doorTransform, int nextSceneId, float rotationDeg, float scale = 1f)
     {
         if (arrowSpawner == null)
         {
@@ -188,10 +267,9 @@ public class SceneManager : MonoBehaviour
             return null;
         }
 
-        Vector3 p = doorTransform.position + Vector3.up;                   
-        return arrowSpawner.createArrow(p.x, p.y, rotationDeg, nextSceneId);
+        Vector3 p = doorTransform.position;
+        return arrowSpawner.createArrow(p.x, p.y, rotationDeg, nextSceneId, scale);
     }
-    public bool IsUIBlockingWorldInput { get; private set; }
 
     public void SetUIBlockingWorldInput(bool block)
     {

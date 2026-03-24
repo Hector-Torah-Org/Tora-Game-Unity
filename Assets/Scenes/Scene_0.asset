@@ -14,38 +14,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneId: 0
   displayName: 
+  backgrounds:
+  - id: background_0_A
+    sprite: {fileID: 0}
+  defaultBackgroundIndex: 0
   arrows:
   - position: {x: 0, y: 4}
     rotationDegrees: 90
     sceneToCall: 1
+    scale: 1
   - position: {x: 5, y: 4}
     rotationDegrees: 0
     sceneToCall: 1
+    scale: 1
   doors:
   - id: door_0_A
-    position: {x: 1, y: 1}
-    scale: {x: 1, y: 1}
+    position: {x: -4.5, y: 1}
+    scale: {x: 0.8, y: 0.8}
     startsOpen: 1
-    nextSceneId: 1
-    arrowRotation: 15
+    nextSceneId: 4
+    arrowRotation: 90
+    arrowScale: 0.5
   - id: door_0_B
-    position: {x: -1, y: 1}
-    scale: {x: 0.9, y: 0.9}
+    position: {x: 4.33, y: -0.33}
+    scale: {x: 1.3, y: 1.3}
     startsOpen: 1
-    nextSceneId: 1
-    arrowRotation: -20
+    nextSceneId: 5
+    arrowRotation: 90
+    arrowScale: 0.8
   chests:
   - id: chest_0_A
-    position: {x: 3, y: 0}
+    position: {x: 7, y: -0.83}
     scale: {x: 1, y: 1}
     startsOpen: 0
     contents:
     - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
-      amount: 1
-  - id: chest_0_B
-    position: {x: 5, y: 0}
-    scale: {x: 1, y: 1}
-    startsOpen: 1
-    contents:
-    - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
-      amount: 1
+      amount: 3

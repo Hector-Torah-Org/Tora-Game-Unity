@@ -3,6 +3,21 @@ using UnityEngine;
 public class ArrowScript : MonoBehaviour
 {
     public int SceneToCall { get; private set; }
+    [SerializeField] private string sortingLayerName = "Default";
+    [SerializeField] private int sortingOrder = 1000;
+
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sortingLayerName = sortingLayerName;
+            spriteRenderer.sortingOrder = sortingOrder;
+        }
+    }
 
     public void Init(Vector2 position, float rotationDegrees, int sceneToCall)
     {

@@ -31,11 +31,8 @@ public class DoorScript : MonoBehaviour
         {
             if (doorArrow == null && SceneManager.Instance != null)
             {
-                doorArrow = SceneManager.Instance.SpawnArrowOnDoor(
-                    transform,
-                    data.nextSceneId,
-                    data.arrowRotation
-                );
+                SceneManager.Instance.SpawnArrowOnDoor(transform, data.nextSceneId, data.arrowRotation, data.arrowScale);
+
                 Debug.Log($"Door {data.id}: spawned arrow -> scene {data.nextSceneId}, rot {data.arrowRotation}");
             }
             else

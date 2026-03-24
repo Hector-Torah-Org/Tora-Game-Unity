@@ -740,7 +740,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000f3f06ee0
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -953,7 +953,7 @@ MonoBehaviour:
   arrowSpawner: {fileID: 384566420}
   doorSpawner: {fileID: 474105902}
   chestSpawner: {fileID: 1968163512}
-  backgroundRenderer: {fileID: 0}
+  backgroundRenderer: {fileID: 1010325968}
   scenes:
   - {fileID: 11400000, guid: 0f2f055180f7b9041b80b03a8fa99699, type: 2}
   - {fileID: 11400000, guid: d51fea778d95e1e4e98ff2a46176e46b, type: 2}
@@ -1166,8 +1166,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -529600269
+  m_SortingLayer: -1
   m_SortingOrder: -100
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1189,7 +1189,7 @@ Transform:
   m_GameObject: {fileID: 1010325967}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 568.41986, y: 244.32088, z: -4.252827}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

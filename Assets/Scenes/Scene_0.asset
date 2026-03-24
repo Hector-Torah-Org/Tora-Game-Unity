@@ -16,36 +16,47 @@ MonoBehaviour:
   displayName: 
   backgrounds:
   - id: background_0_A
-    sprite: {fileID: -7328356432364208890, guid: 299ad5d543ce008418f3d1c7727b02c9, type: 3}
+    sprite: {fileID: 3696299231677589421, guid: 902fcfcb8d1d7a84299c1d332950cca5, type: 3}
   defaultBackgroundIndex: 0
   arrows:
-  - position: {x: 0, y: 4}
-    rotationDegrees: 90
+  - position: {x: 3, y: 0}
+    rotationDegrees: 60
+    sceneToCall: 1
+    scale: 0.5
+  - position: {x: -7.8, y: -3.1}
+    rotationDegrees: 180
     sceneToCall: 1
     scale: 1
-  - position: {x: 5, y: 4}
+  - position: {x: 7.8, y: -4}
     rotationDegrees: 0
     sceneToCall: 1
-    scale: 1
+    scale: 0.8
   doors:
   - id: door_0_A
-    position: {x: -4.5, y: 1}
-    scale: {x: 0.8, y: 0.8}
-    startsOpen: 1
+    position: {x: -5.9, y: -0.52}
+    scale: {x: 1.2, y: 1.2}
+    startsOpen: 0
     nextSceneId: 4
     arrowRotation: 90
     arrowScale: 0.5
   - id: door_0_B
-    position: {x: 4.33, y: -0.33}
+    position: {x: 6.97, y: -2.22}
     scale: {x: 1.3, y: 1.3}
-    startsOpen: 1
+    startsOpen: 0
     nextSceneId: 5
     arrowRotation: 90
     arrowScale: 0.8
   chests:
   - id: chest_0_A
-    position: {x: 7, y: -0.83}
-    scale: {x: 1, y: 1}
+    position: {x: 5.3, y: -3}
+    scale: {x: 0.7, y: 0.7}
+    startsOpen: 0
+    contents:
+    - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
+      amount: 3
+  - id: chest_0_A
+    position: {x: -3.2, y: -1.2}
+    scale: {x: 0.6, y: 0.6}
     startsOpen: 0
     contents:
     - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}

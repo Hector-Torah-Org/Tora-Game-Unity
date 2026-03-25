@@ -16,6 +16,7 @@ public class SceneData : ScriptableObject
     public List<ArrowSpawnData> arrows = new List<ArrowSpawnData>();
     public List<DoorSpawnData> doors = new List<DoorSpawnData>();
     public List<ChestSpawnData> chests = new List<ChestSpawnData>();
+    public List<InteractableSpawnData> interactables = new List<InteractableSpawnData>();
 }
 
 [Serializable]
@@ -55,4 +56,19 @@ public class DoorSpawnData
     public int nextSceneId;
     public float arrowRotation;
     public float arrowScale = 1f;
+}
+
+[Serializable]
+public class InteractableSpawnData
+{
+    public string id;
+    public InterScript prefab;
+
+    public Vector2 position;
+    public Vector2 scale = Vector2.one;
+
+    public bool startsUsed;
+
+    public ItemData rewardItem;
+    public int rewardAmount = 1;
 }

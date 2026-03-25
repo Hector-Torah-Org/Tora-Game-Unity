@@ -9,6 +9,7 @@ public class SceneManager : MonoBehaviour
     [SerializeField] private ArrowSpawner arrowSpawner;
     [SerializeField] private DoorSpawner doorSpawner;
     [SerializeField] private ChestSpawner chestSpawner;
+    [SerializeField] private InterSpawner interSpawner;
 
     [Header("Background")]
     [SerializeField] private SpriteRenderer backgroundRenderer;
@@ -21,6 +22,7 @@ public class SceneManager : MonoBehaviour
     private readonly Dictionary<string, bool> doorOpenState = new Dictionary<string, bool>();
     private readonly Dictionary<string, bool> chestOpenState = new Dictionary<string, bool>();
     private readonly Dictionary<string, List<ItemStack>> chestContentsState = new Dictionary<string, List<ItemStack>>();
+    private readonly Dictionary<string, bool> interactableUsedState = new Dictionary<string, bool>();
 
     private readonly Dictionary<int, int> sceneBackgroundState = new Dictionary<int, int>();
 
@@ -59,6 +61,8 @@ public class SceneManager : MonoBehaviour
 
     public void ChangeScene(int sc)
     {
+
+        interSpawner.DestroyAllSpawned();
         doorSpawner.DestroyAllSpawned();
         chestSpawner.DestroyAllSpawned();
 
@@ -91,6 +95,18 @@ public class SceneManager : MonoBehaviour
             bool isOpen = GetChestIsOpen(c.id, c.startsOpen);
             List<ItemStack> contents = GetChestContents(c.id, c.contents);
             chestSpawner.CreateChest(c, isOpen, contents);
+        }
+
+        if (interSpawner == null)
+        {
+            Debug.LogError("InterSpawner not assigned in SceneManager.");
+            return;
+        }
+
+        foreach (var inter in data.interactables)
+        {
+            bool isUsed = GetInteractableIsUsed(inter.id, inter.startsUsed);
+            interSpawner.CreateInteractable(inter, isUsed);
         }
 
         if (doorSpawner != null)
@@ -156,7 +172,9 @@ public class SceneManager : MonoBehaviour
         int index = GetSceneBackgroundIndex(data.sceneId, data.defaultBackgroundIndex);
 
         if (index < 0 || index >= data.backgrounds.Count)
+        {
             index = 0;
+        }
 
         BackgroundOption option = data.backgrounds[index];
 
@@ -274,5 +292,18 @@ public class SceneManager : MonoBehaviour
     public void SetUIBlockingWorldInput(bool block)
     {
         IsUIBlockingWorldInput = block;
+    }
+
+    public bool GetInteractableIsUsed(string interactableId, bool fallback)
+    {
+        if (interactableUsedState.TryGetValue(interactableId, out bool used))
+            return used;
+
+        return fallback;
+    }
+
+    public void SetInteractableUsed(string interactableId, bool used)
+    {
+        interactableUsedState[interactableId] = used;
     }
 }

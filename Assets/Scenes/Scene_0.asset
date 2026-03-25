@@ -61,3 +61,11 @@ MonoBehaviour:
     contents:
     - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
       amount: 3
+  interactables:
+  - id: well_0_A
+    prefab: {fileID: 5780172284917241810, guid: ce8836397b5ff174f888cfde912b6312, type: 3}
+    position: {x: -1, y: -3}
+    scale: {x: 1, y: 1}
+    startsUsed: 0
+    rewardItem: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
+    rewardAmount: 1

@@ -145,7 +145,9 @@ public class TorahManager : MonoBehaviour
         yield return StartCoroutine(LoadImageFromUrl(currentImage.link));
 
         if (!roundRunning)
+        {
             yield break;
+        }    
 
         SetStatus("Choose a classification");
         SetButtonsInteractable(true);

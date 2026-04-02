@@ -16,13 +16,13 @@ MonoBehaviour:
   displayName: 
   backgrounds:
   - id: background_0_A
-    sprite: {fileID: 3696299231677589421, guid: 902fcfcb8d1d7a84299c1d332950cca5, type: 3}
+    sprite: {fileID: 560613170282466515, guid: 4c7f5dd5013b0ea438e637009631ec4a, type: 3}
   defaultBackgroundIndex: 0
   arrows:
-  - position: {x: 3, y: 0}
+  - position: {x: 2, y: -1}
     rotationDegrees: 60
     sceneToCall: 1
-    scale: 0.5
+    scale: 0.6
   - position: {x: -7.8, y: -3.1}
     rotationDegrees: 180
     sceneToCall: 1
@@ -33,30 +33,30 @@ MonoBehaviour:
     scale: 0.8
   doors:
   - id: door_0_A
-    position: {x: -5.9, y: -0.52}
-    scale: {x: 1.2, y: 1.2}
+    position: {x: -6.24, y: -0.74}
+    scale: {x: 1.4, y: 1.4}
     startsOpen: 0
     nextSceneId: 4
     arrowRotation: 90
     arrowScale: 0.5
   - id: door_0_B
-    position: {x: 6.97, y: -2.22}
-    scale: {x: 1.3, y: 1.3}
+    position: {x: 5.6, y: -1.6}
+    scale: {x: 1.4, y: 1.4}
     startsOpen: 0
     nextSceneId: 5
     arrowRotation: 90
     arrowScale: 0.8
   chests:
   - id: chest_0_A
-    position: {x: 5.3, y: -3}
-    scale: {x: 0.7, y: 0.7}
+    position: {x: 3.9, y: -2.4}
+    scale: {x: 0.8, y: 0.8}
     startsOpen: 0
     contents:
     - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
       amount: 3
   - id: chest_0_A
-    position: {x: -3.2, y: -1.2}
-    scale: {x: 0.6, y: 0.6}
+    position: {x: -4.5, y: -1.7}
+    scale: {x: 0.7, y: 0.7}
     startsOpen: 0
     contents:
     - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
@@ -64,8 +64,8 @@ MonoBehaviour:
   interactables:
   - id: well_0_A
     prefab: {fileID: 5780172284917241810, guid: ce8836397b5ff174f888cfde912b6312, type: 3}
-    position: {x: -1, y: -3}
-    scale: {x: 1, y: 1}
+    position: {x: -1.9, y: -2.8}
+    scale: {x: 3, y: 3}
     startsUsed: 0
-    rewardItem: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
+    rewardItem: {fileID: 11400000, guid: 1d885a3bfbbf7c040a5ec1f88f696a9f, type: 2}
     rewardAmount: 1

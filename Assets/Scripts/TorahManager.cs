@@ -89,6 +89,7 @@ public class TorahManager : MonoBehaviour
         currentOnLose = onLose;
 
         roundRunning = true;
+        SceneManager.Instance?.SetUIBlockingWorldInput(true);
         localClassifications.Clear();
         currentImages.Clear();
         currentImageIndex = 0;
@@ -233,6 +234,7 @@ public class TorahManager : MonoBehaviour
         roundRunning = false;
 
         HideOverlay();
+        SceneManager.Instance?.SetUIBlockingWorldInput(false);
         currentOnWin?.Invoke();
     }
 
@@ -244,6 +246,7 @@ public class TorahManager : MonoBehaviour
         roundRunning = false;
 
         HideOverlay();
+        SceneManager.Instance?.SetUIBlockingWorldInput(false);
         currentOnLose?.Invoke();
     }
 

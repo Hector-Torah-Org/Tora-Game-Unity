@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Inventory : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
+        if (EventSystem.current.currentSelectedGameObject != null) { // Don't toggle inventory if a UI element is currently selected
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.I))
         {
             if (isOpen) Close();

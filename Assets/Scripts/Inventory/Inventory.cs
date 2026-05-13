@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject != null) { // Don't toggle inventory if a UI element is currently selected
+        if (EventSystem.current.currentSelectedGameObject != null) { 
             return;
         }
         if (Input.GetKeyDown(KeyCode.I))

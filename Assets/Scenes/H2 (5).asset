@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
+  m_Name: H2 (5)
+  m_EditorClassIdentifier: 
+  sceneId: 5
+  displayName: 
+  backgrounds:
+  - id: background_4_A
+    sprite: {fileID: 7795437240613762866, guid: c680b40c04b2da341aa92157f97e3947, type: 3}
+  defaultBackgroundIndex: 0
+  arrows:
+  - position: {x: 0, y: -3.7}
+    rotationDegrees: 270
+    sceneToCall: 0
+    scale: 1
+  doors: []
+  chests: []
+  interactables: []

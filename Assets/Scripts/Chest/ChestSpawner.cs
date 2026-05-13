@@ -19,7 +19,10 @@ public class ChestSpawner : MonoBehaviour
     public void DestroyAllSpawned()
     {
         for (int i = 0; i < spawned.Count; i++)
-            if (spawned[i] != null) Destroy(spawned[i].gameObject);
+        {
+            if (spawned[i] != null) { Destroy(spawned[i].gameObject); }
+        }
+            
 
         spawned.Clear();
     }

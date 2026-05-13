@@ -10,20 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
-  m_Name: Scene_2
+  m_Name: F1 (2)
   m_EditorClassIdentifier: 
   sceneId: 2
   displayName: 
   backgrounds:
-  - id: background_2_A
-    sprite: {fileID: -7328356432364208890, guid: 299ad5d543ce008418f3d1c7727b02c9, type: 3}
-  - id: background_2_B
-    sprite: {fileID: -7328356432364208890, guid: 299ad5d543ce008418f3d1c7727b02c9, type: 3}
+  - id: 0
+    sprite: {fileID: 7128744603280083028, guid: 279636142dbc95643beb6ff257178200, type: 3}
   defaultBackgroundIndex: 0
   arrows:
   - position: {x: 0, y: -4}
     rotationDegrees: 270
     sceneToCall: 1
     scale: 1
+  - position: {x: -3.4, y: 1}
+    rotationDegrees: 90
+    sceneToCall: 3
+    scale: 0.6
   doors: []
   chests: []
+  interactables: []

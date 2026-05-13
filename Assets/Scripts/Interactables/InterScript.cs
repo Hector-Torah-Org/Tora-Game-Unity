@@ -26,8 +26,8 @@ public class InterScript : MonoBehaviour
     {
         isUsed = used;
 
-        if (unusedVisual != null) unusedVisual.SetActive(!isUsed);
-        if (usedVisual != null) usedVisual.SetActive(isUsed);
+        if (unusedVisual != null) { unusedVisual.SetActive(!isUsed); }
+        if (usedVisual != null) { usedVisual.SetActive(isUsed); }
     }
 
     private void GiveReward()
@@ -48,7 +48,12 @@ public class InterScript : MonoBehaviour
         {
             item = data.rewardItem,
             amount = data.rewardAmount
+
         });
+        if (data.id == "well_trigger1")                     // bin noch am überlegen ob ich das hier lasse tbh
+        {
+            QuestManager.Instance?.AddQuest("Finde einen Ort für das Wasser");
+        }
     }
 
     private void OnMouseDown()

@@ -32,7 +32,7 @@ public class ChestUI : MonoBehaviour
     {
         currentChest = chest;
 
-        if (chestPanel != null) chestPanel.gameObject.SetActive(true);
+        if (chestPanel != null) { chestPanel.gameObject.SetActive(true); }
 
         SceneManager.Instance?.SetUIBlockingWorldInput(true);
 
@@ -43,7 +43,7 @@ public class ChestUI : MonoBehaviour
     {
         currentChest = null;
         ClearUI();
-        if (chestPanel != null) chestPanel.gameObject.SetActive(false);
+        if (chestPanel != null) { chestPanel.gameObject.SetActive(false); }
 
         SceneManager.Instance?.SetUIBlockingWorldInput(false);
     }
@@ -54,7 +54,7 @@ public class ChestUI : MonoBehaviour
 
         if (gridParent == null || itemViewPrefab == null || playerInventory == null || currentChest == null)
         {
-            Debug.LogError("ChestUI not configured (gridParent/itemViewPrefab/playerInventory/currentChest).");
+            Debug.LogError("ChestUI not configured");
             return;
         }
 

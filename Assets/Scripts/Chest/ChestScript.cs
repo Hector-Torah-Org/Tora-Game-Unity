@@ -25,8 +25,8 @@ public class ChestScript : MonoBehaviour
     {
         isOpen = open;
 
-        if (closedVisual != null) closedVisual.SetActive(!isOpen);
-        if (openVisual != null) openVisual.SetActive(isOpen);
+        if (closedVisual != null) { closedVisual.SetActive(!isOpen); }
+        if (openVisual != null) { openVisual.SetActive(isOpen); }
     }
 
     public void RemoveItem(ItemStack stack)
@@ -44,7 +44,7 @@ public class ChestScript : MonoBehaviour
         {
             if (TorahManager.Instance == null)
             {
-                Debug.LogWarning("TorahManager.Instance is null - no minigame started.");
+                Debug.LogWarning("TorahManager.Instance is null");
                 return;
             }
 
@@ -67,7 +67,7 @@ public class ChestScript : MonoBehaviour
         }
         else
         {
-            Debug.LogError("ChestUI.Instance is null. Add ChestUI to the scene and assign references.");
+            Debug.LogError("ChestUI.Instance is null");
         }
     }
 }

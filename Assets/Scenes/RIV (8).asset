@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
+  m_Name: RIV (8)
+  m_EditorClassIdentifier: 
+  sceneId: 8
+  displayName: 
+  backgrounds:
+  - id: 0
+    sprite: {fileID: -4348395274137670465, guid: 3084b27164d29694a9008d4034ff7755, type: 3}
+  defaultBackgroundIndex: 0
+  arrows:
+  - position: {x: 0, y: -4}
+    rotationDegrees: 270
+    sceneToCall: 3
+    scale: 1
+  - position: {x: -7, y: -2}
+    rotationDegrees: 180
+    sceneToCall: 9
+    scale: 0.9
+  doors: []
+  chests: []
+  interactables: []

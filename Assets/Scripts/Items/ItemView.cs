@@ -54,7 +54,7 @@ public class ItemView : MonoBehaviour
             if (used)                                                                                        //probiert item zu nutzen
             {
                 inventoryOwner?.RemoveItem(stack);
-                Destroy(gameObject);
+                
             }
         }
     }

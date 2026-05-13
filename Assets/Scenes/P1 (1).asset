@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
+  m_Name: P1 (1)
+  m_EditorClassIdentifier: 
+  sceneId: 1
+  displayName: 
+  backgrounds:
+  - id: background_1_A
+    sprite: {fileID: 4963781718144634110, guid: c79167b302bc39045892820309434764, type: 3}
+  defaultBackgroundIndex: 0
+  arrows:
+  - position: {x: 1, y: -4}
+    rotationDegrees: 270
+    sceneToCall: 0
+    scale: 1
+  - position: {x: 2, y: 0.8}
+    rotationDegrees: 40
+    sceneToCall: 2
+    scale: 0.4
+  - position: {x: 8.2, y: 0.7}
+    rotationDegrees: 20
+    sceneToCall: 9
+    scale: 0.7
+  doors:
+  - id: door_1_A
+    position: {x: -5.45, y: -0.04}
+    scale: {x: 0.8, y: 1.08}
+    startsOpen: 0
+    nextSceneId: 6
+    arrowRotation: 90
+    arrowScale: 0.5
+  chests:
+  - id: chest_1_A
+    position: {x: -6.9, y: -0.9}
+    scale: {x: 0.6, y: 0.6}
+    startsOpen: 0
+    contents:
+    - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
+      amount: 3
+  interactables: []

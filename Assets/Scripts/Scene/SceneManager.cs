@@ -23,10 +23,12 @@ public class SceneManager : MonoBehaviour
     private readonly Dictionary<string, bool> chestOpenState = new Dictionary<string, bool>();
     private readonly Dictionary<string, List<ItemStack>> chestContentsState = new Dictionary<string, List<ItemStack>>();
     private readonly Dictionary<string, bool> interactableUsedState = new Dictionary<string, bool>();
+    private readonly Dictionary<string, bool> sceneEventState = new Dictionary<string, bool>();
 
     private readonly Dictionary<int, int> sceneBackgroundState = new Dictionary<int, int>();
 
     private int currentSceneId = -1;
+    public int CurrentSceneId => currentSceneId;
 
     public bool IsUIBlockingWorldInput { get; private set; }
 
@@ -61,6 +63,7 @@ public class SceneManager : MonoBehaviour
 
     public void ChangeScene(int sc)
     {
+        QuestManager.Instance?.ClearSceneHint();
 
         interSpawner.DestroyAllSpawned();
         doorSpawner.DestroyAllSpawned();
@@ -82,6 +85,19 @@ public class SceneManager : MonoBehaviour
 
         currentSceneId = sc;
 
+        //----------------------------------------------------------------- H I E R  K O M M E N  D I E  Q U E S T S  H I N -----------------------------------------------------------------
+        if (sc == 3)
+        {
+            QuestManager.Instance?.SetSceneHint("Ich muss einen Weg finden, das Geröll wegzuräumen...");
+            QuestManager.Instance?.AddQuest("Finde etwas, um Geröll wegzuräumen");
+        }
+
+        if (sc == 9)
+        {
+            QuestManager.Instance?.SetSceneHint("Hier kann ich nicht vorbei... vielleicht brauche ich eine Axt");
+            QuestManager.Instance?.AddQuest("Finde eine Axt für den blockierten Weg");
+        }
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         ApplySceneBackground(data);                                                                   // <<< NEU: Background setzen
 
         if (chestSpawner == null)
@@ -140,6 +156,16 @@ public class SceneManager : MonoBehaviour
         foreach (var a in data.arrows)                                                                      //Spawnt arrows
         {
             arrowSpawner.createArrow(a.position.x, a.position.y, a.rotationDegrees, a.sceneToCall, a.scale);
+        }
+
+        // SPECIFIC ARROW SITUATIONS, PLEASE DO NOT FORGET ----------------------------------------------------------------------------------------------------------------------------------------------------
+        if (sc == 3 && GetSceneEventState("scene3_special_used"))
+        {
+            arrowSpawner.createArrow(1.5f, 0f, 90f, 8, 0.5f);
+        }
+        if (sc == 9 && GetSceneEventState("scene9_special_used"))
+        {
+            arrowSpawner.createArrow(7.3f, 2.8f, 90f, 7, 0.5f);
         }
 
         Debug.Log($"Loaded scene data: {data.displayName} (id={data.sceneId})");
@@ -233,6 +259,36 @@ public class SceneManager : MonoBehaviour
 
         SetSceneBackgroundIndex(currentSceneId, index);
     }
+
+
+
+    public void ReloadCurrentScene()
+    {
+        if (currentSceneId < 0)
+        {
+            Debug.LogWarning("No current scene to reload.");
+            return;
+        }
+
+        ChangeScene(currentSceneId);
+    }
+
+    public bool GetSceneEventState(string eventId, bool fallback = false)
+    {
+        if (sceneEventState.TryGetValue(eventId, out bool value))
+            return value;
+
+        return fallback;
+    }
+
+    public void SetSceneEventState(string eventId, bool value)
+    {
+        sceneEventState[eventId] = value;
+    }
+
+
+
+
 
     public bool GetChestIsOpen(string chestId, bool fallback)
     {

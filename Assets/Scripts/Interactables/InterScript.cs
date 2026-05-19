@@ -50,9 +50,13 @@ public class InterScript : MonoBehaviour
             amount = data.rewardAmount
 
         });
-        if (data.id == "well_trigger1")                     // bin noch am überlegen ob ich das hier lasse tbh
+        if (data.id == "well_trigger1")  // bin noch am überlegen ob ich das hier lasse tbh ------------------------------------------------------------------------------------------------------
         {
             QuestManager.Instance?.AddQuest("Finde einen Ort für das Wasser");
+        }
+        if (data.id == "axe_trigger1")                     
+        {
+            QuestManager.Instance?.AddQuest("Finde einen Nutzen für die Axt");
         }
     }
 

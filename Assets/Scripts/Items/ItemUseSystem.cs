@@ -14,7 +14,7 @@ public class ItemUseSystem : MonoBehaviour
     [SerializeField] private ItemData triggerItem2;
     [SerializeField] private int targetSceneId2 = 0;
     [SerializeField] private int newBackgroundIndex2 = 1;
-    [SerializeField] private string eventId2 = "scene11_special_used";
+    [SerializeField] private string eventId2 = "scene9_special_used";
 
     private void Awake()
     {

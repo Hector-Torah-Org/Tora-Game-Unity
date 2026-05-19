@@ -54,7 +54,7 @@ MonoBehaviour:
     contents:
     - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
       amount: 3
-  - id: chest_0_A
+  - id: chest_0_B
     position: {x: -4.5, y: -1.7}
     scale: {x: 0.7, y: 0.7}
     startsOpen: 0

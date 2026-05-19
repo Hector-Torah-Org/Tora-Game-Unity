@@ -28,5 +28,12 @@ MonoBehaviour:
     sceneToCall: 9
     scale: 0.9
   doors: []
-  chests: []
+  chests:
+  - id: chest_8_A
+    position: {x: 6, y: -4}
+    scale: {x: 1.2, y: 1.2}
+    startsOpen: 0
+    contents:
+    - item: {fileID: 0}
+      amount: 0
   interactables: []

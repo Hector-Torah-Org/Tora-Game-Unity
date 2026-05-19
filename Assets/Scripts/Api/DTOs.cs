@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 public class PlayerCreationDTO
 {
@@ -49,4 +50,26 @@ public class Classification
 public class ClassificationSendDTO
 {
     public List<Classification> classifications;
+}
+
+[Serializable]
+public class StatisticsDTO
+{
+    public int year;
+    public double[] values; 
+}
+
+[Serializable]
+public class LeaderboardDTO
+{
+    public int page;
+    public LeaderboardElementDTO[] leaderboardElementDTOS;
+
+    [Serializable]
+    public class LeaderboardElementDTO
+    {
+        public string username;
+        public int place;
+        public string score;
+    }
 }

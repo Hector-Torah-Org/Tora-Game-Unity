@@ -23,7 +23,7 @@ public class ButtonInput : MonoBehaviour
         
 
         StartCoroutine(apiConnection.SessionLogin(firstName, lastName, userName, success => { panel.SetActive(false); }, 
-                                    error => { errorDisplay.text = "User not found"; }));
+                                    error => { errorDisplay.text = error; }));
     }
 
     public void SignUpLoginClicked()

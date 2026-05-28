@@ -157,14 +157,16 @@ public class ApiConnection : MonoBehaviour
         string url = rootUrl + $"/Statistics/playerAmount/{sessionId}/{year}";
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
+        Debug.Log("Received response: " + request.downloadHandler.text);
         HandleResponse(request, onSuccess, error => Debug.LogError(error));
     }
 
     public IEnumerator GetConfidenceStatistic(int year, System.Action<StatisticsDTO> onSuccess)
     {
-        string url = rootUrl + $"/Statistics/classificationAmount/{sessionId}/{year}";
+        string url = rootUrl + $"/Statistics/playerConfidence/{sessionId}/{year}";
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
+        Debug.Log("Received response: " + request.downloadHandler.text);
         HandleResponse(request, onSuccess, error => Debug.LogError(error));
     }
 

@@ -30,7 +30,7 @@ public class SceneManager : MonoBehaviour
     private int currentSceneId = -1;
     public int CurrentSceneId => currentSceneId;
 
-    public bool IsUIBlockingWorldInput { get; private set; }
+    public bool IsUIBlockingWorldInput { get; set; }
 
     private void Awake()
     {
@@ -88,14 +88,14 @@ public class SceneManager : MonoBehaviour
         //----------------------------------------------------------------- H I E R  K O M M E N  D I E  Q U E S T S  H I N -----------------------------------------------------------------
         if (sc == 3)
         {
-            QuestManager.Instance?.SetSceneHint("Ich muss einen Weg finden, das Geröll wegzuräumen...");
-            QuestManager.Instance?.AddQuest("Finde etwas, um Geröll wegzuräumen");
+            QuestManager.Instance?.SetSceneHint("Ich muss einen Weg finden, das Gerï¿½ll wegzurï¿½umen...");
+            QuestManager.Instance?.AddQuest("Finde etwas, um Gerï¿½ll wegzurï¿½umen");
         }
 
         if (sc == 9)
         {
             QuestManager.Instance?.SetSceneHint("Hier kann ich nicht vorbei... vielleicht brauche ich eine Axt");
-            QuestManager.Instance?.AddQuest("Finde eine Axt für den blockierten Weg");
+            QuestManager.Instance?.AddQuest("Finde eine Axt fï¿½r den blockierten Weg");
         }
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         ApplySceneBackground(data);                                                                   // <<< NEU: Background setzen

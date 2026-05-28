@@ -31,7 +31,6 @@ public class InputNavigation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             clickButton.onClick.Invoke();
-            Debug.Log("Button pressed");
         }
     }
 }

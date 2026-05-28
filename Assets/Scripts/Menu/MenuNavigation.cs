@@ -14,6 +14,7 @@ public class MenuNavigation : MonoBehaviour
     [SerializeField] public GameObject LeaderboardMenu;
     [SerializeField] public GameObject TutorialMenu;
     [SerializeField] public ApiConnection apiConnection;
+    [SerializeField] public SceneManager sceneManager;
 
 
     private List<GameObject> history = new List<GameObject>();
@@ -35,12 +36,13 @@ public class MenuNavigation : MonoBehaviour
         if (history.Count() > 0)
         {
             history.Last().SetActive(false);
-            if (history.Count() > 1) history[history.Count() - 2].SetActive(true);
+            if (history.Count() > 1) history[history.Count() - 2].SetActive(true); else sceneManager.IsUIBlockingWorldInput = false;
             history.RemoveAt(history.Count() - 1);
         } else
         {
             MainMenu.SetActive(true);
             history.Add(MainMenu);
+            sceneManager.IsUIBlockingWorldInput = true;
         }
     }
 
@@ -48,6 +50,7 @@ public class MenuNavigation : MonoBehaviour
     {
         history.Last().SetActive(false);
         history.Add(submenu);
+        sceneManager.IsUIBlockingWorldInput = true;
         history.Last().SetActive(true);
     }
 
@@ -56,6 +59,8 @@ public class MenuNavigation : MonoBehaviour
     public void ButtonStatistics()
     {
         ActivateSubmenu(StatisticsMenu);
+        Debug.Log("Starting to draw graph");
+        StartCoroutine(StatisticsMenu.GetComponent<StatisticsPanel>().DrawGraph());
     }
 
     public void ButtonLeaderboard()

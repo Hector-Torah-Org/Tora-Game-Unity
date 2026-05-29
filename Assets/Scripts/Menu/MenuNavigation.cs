@@ -66,6 +66,7 @@ public class MenuNavigation : MonoBehaviour
     public void ButtonLeaderboard()
     {
         ActivateSubmenu(LeaderboardMenu);
+        StartCoroutine(LeaderboardMenu.GetComponent<LeaderboardPanel>().ReloadLeaderboard());
     }
 
     public void ButtonTutorial()

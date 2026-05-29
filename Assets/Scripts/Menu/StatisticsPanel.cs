@@ -85,13 +85,13 @@ public class StatisticsPanel : MonoBehaviour
     public void YearUpButton()
     {
         year++;
-        DrawGraph();
+        StartCoroutine(DrawGraph());
     }
 
     public void YearDownButton()
     {
         year--;
-        DrawGraph();
+        StartCoroutine(DrawGraph());
     }
 
     public IEnumerator DrawGraph()
@@ -179,7 +179,6 @@ public class StatisticsPanel : MonoBehaviour
             float xPos = x + (float)(i * xStep);
             float yPos = y + height - (confidenceData[i] * height).ConvertTo<float>();
             
-            Debug.Log("Drawing confidence point at x: " + xPos + " y: " + yPos + " confidence: " + confidenceData[i]);
             painter.LineTo(new Vector2(xPos, yPos));
         }
         painter.LineTo(new Vector2(x + width, y + height));

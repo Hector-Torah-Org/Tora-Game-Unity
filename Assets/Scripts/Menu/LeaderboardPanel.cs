@@ -68,4 +68,88 @@ public class LeaderboardPanel : MonoBehaviour
             currentConfidenceEntryObjects.Add(entry);
         }
     }
+
+    public void FirstAmountPage()
+    {
+        amountPage = 0;
+        StartCoroutine(ReloadLeaderboard());
+    }
+
+    public void NextAmountPage()
+    {
+        amountPage++;
+        StartCoroutine(ReloadLeaderboard());
+    }
+
+    public void PreviousAmountPage()
+    {
+        if (amountPage > 0)
+        {
+            amountPage--;
+            StartCoroutine(ReloadLeaderboard());
+        }
+    }
+
+    public void FirstConfidencePage()
+    {
+        confidencePage = 0;
+        StartCoroutine(ReloadLeaderboard());
+    }
+    
+    public void NextConfidencePage()
+    {
+        confidencePage++;
+        StartCoroutine(ReloadLeaderboard());
+    }
+
+    public void PreviousConfidencePage()
+    {
+        if (confidencePage > 0)
+        {
+            confidencePage--;
+            StartCoroutine(ReloadLeaderboard());
+        }
+    }
+
+    public IEnumerator CenterAmountonPlayer()
+    {
+        if (playerPositionAmount == 0)
+        {
+            yield return StartCoroutine(apiConnection.GetLeaderboard(0, pagesize, "amountPlayer", (leaderbordDTO) =>
+            {
+                amountPage = leaderbordDTO.page;
+                if (!amountEntries.ContainsKey(amountPage))
+                {
+                    amountEntries[amountPage] = leaderbordDTO.leaderboardElementDTOS.ToList();
+                }
+                playerPositionAmount = amountEntries[amountPage].Find(element => element.username == apiConnection.userName).place;
+            }));
+        }
+
+        yield return ReloadLeaderboard();
+    }
+    public void CenterAmountonPlayerButton()
+    {
+        StartCoroutine(CenterAmountonPlayer());
+    }
+
+    public IEnumerator CenterConfidenceonPlayer()
+    {
+        if (playerPositionConfidence == 0)
+        {
+            yield return StartCoroutine(apiConnection.GetLeaderboard(0, pagesize, "confidencePlayer", (leaderbordDTO) =>
+            {
+                confidencePage = leaderbordDTO.page;
+                if (!confidenceEntries.ContainsKey(confidencePage))
+                {
+                    confidenceEntries[confidencePage] = leaderbordDTO.leaderboardElementDTOS.ToList();
+                }
+                playerPositionConfidence = confidenceEntries[confidencePage].Find(element => element.username == apiConnection.userName).place;
+            }));
+        }
+    }
+    public void CenterConfidenceonPlayerButton()
+    {
+        StartCoroutine(CenterConfidenceonPlayer());
+    }
 }

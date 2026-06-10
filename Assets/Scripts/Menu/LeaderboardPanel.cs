@@ -19,8 +19,10 @@ public class LeaderboardPanel : MonoBehaviour
     int confidencePage = 0;
     public int pagesize = 100;
 
-    int playerPositionAmount;
-    int playerPositionConfidence;
+    int? playerPageAmount = null;
+    int? playerPageConfidence = null;
+    int? playerRankAmount = null;
+    int? playerRankConfidence = null;
 
     List<LeaderboardElement> currentAmountEntryObjects = new List<LeaderboardElement>();
     List<LeaderboardElement> currentConfidenceEntryObjects = new List<LeaderboardElement>();
@@ -113,18 +115,23 @@ public class LeaderboardPanel : MonoBehaviour
 
     public IEnumerator CenterAmountonPlayer()
     {
-        if (playerPositionAmount == 0)
+        if (playerPageAmount == null)
         {
             yield return StartCoroutine(apiConnection.GetLeaderboard(0, pagesize, "amountPlayer", (leaderbordDTO) =>
             {
                 amountPage = leaderbordDTO.page;
+                playerPageAmount = leaderbordDTO.page;
                 if (!amountEntries.ContainsKey(amountPage))
                 {
                     amountEntries[amountPage] = leaderbordDTO.leaderboardElementDTOS.ToList();
                 }
-                playerPositionAmount = amountEntries[amountPage].Find(element => element.username == apiConnection.userName).place;
+                playerRankAmount = amountEntries[amountPage].Find(element => element.username == apiConnection.userName).place;
             }));
+        }else
+        {
+            amountPage = playerPageAmount.Value;
         }
+        AmountLeaderboardContent.GetComponent<RectTransform>().anchoredPosition = new Vector2(AmountLeaderboardContent.GetComponent<RectTransform>().anchoredPosition.x, playerRankAmount.Value * -50);
 
         yield return ReloadLeaderboard();
     }
@@ -135,18 +142,25 @@ public class LeaderboardPanel : MonoBehaviour
 
     public IEnumerator CenterConfidenceonPlayer()
     {
-        if (playerPositionConfidence == 0)
+        if (playerPageConfidence == null)
         {
             yield return StartCoroutine(apiConnection.GetLeaderboard(0, pagesize, "confidencePlayer", (leaderbordDTO) =>
             {
                 confidencePage = leaderbordDTO.page;
+                playerPageConfidence = leaderbordDTO.page;
                 if (!confidenceEntries.ContainsKey(confidencePage))
                 {
                     confidenceEntries[confidencePage] = leaderbordDTO.leaderboardElementDTOS.ToList();
                 }
-                playerPositionConfidence = confidenceEntries[confidencePage].Find(element => element.username == apiConnection.userName).place;
+                playerRankConfidence = confidenceEntries[confidencePage].Find(element => element.username == apiConnection.userName).place;
             }));
         }
+        else
+        {
+            confidencePage = playerPageConfidence.Value;
+        }
+        ConfidenceLeaderboardContent.GetComponent<RectTransform>().anchoredPosition = new Vector2(ConfidenceLeaderboardContent.GetComponent<RectTransform>().anchoredPosition.x, playerRankConfidence.Value * -50);
+        yield return ReloadLeaderboard();
     }
     public void CenterConfidenceonPlayerButton()
     {

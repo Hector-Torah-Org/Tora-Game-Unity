@@ -46,8 +46,19 @@ public class ApiConnection : MonoBehaviour
         System.Action<LoginResponseDTO> onSuccess, System.Action<string> onError)
     {
         this.userName = userName;
-        string url = rootUrl + $"/players/{firstName}/{lastName}/{userName}";
+        string url = rootUrl + $"/players/login";
+        PlayerCreationDTO dto = new PlayerCreationDTO
+        {
+            firstName = firstName,
+            lastName = lastName,
+            userName = userName
+        };
+        string json = JsonUtility.ToJson(dto);
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
         UnityWebRequest request = UnityWebRequest.Get(url);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
         yield return request.SendWebRequest();
 
         HandleResponse<LoginResponseDTO>(request, result =>

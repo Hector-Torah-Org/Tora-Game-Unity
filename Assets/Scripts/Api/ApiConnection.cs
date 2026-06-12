@@ -7,7 +7,6 @@ using System;
 
 public class ApiConnection : MonoBehaviour
 {
-    private const string rootUrl = "http://localhost:8080";
     public string sessionId;
     public string userName;
 
@@ -47,6 +46,7 @@ public class ApiConnection : MonoBehaviour
     {
         this.userName = userName;
         string url = rootUrl + $"/players/login";
+        string url = rootUrl + "/players/login";
         PlayerCreationDTO dto = new PlayerCreationDTO
         {
             firstName = firstName,
@@ -56,6 +56,7 @@ public class ApiConnection : MonoBehaviour
         string json = JsonUtility.ToJson(dto);
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
         UnityWebRequest request = UnityWebRequest.Get(url);
+        UnityWebRequest request = new UnityWebRequest(url, "POST");
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");

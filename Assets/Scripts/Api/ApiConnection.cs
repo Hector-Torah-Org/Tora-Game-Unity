@@ -7,6 +7,7 @@ using System;
 
 public class ApiConnection : MonoBehaviour
 {
+    private const string rootUrl = "http://localhost:8080";
     public string sessionId;
     public string userName;
 

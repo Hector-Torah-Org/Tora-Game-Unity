@@ -24,6 +24,7 @@ public class TorahManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI characterText;
     [SerializeField] private Button decoratedButton;
     [SerializeField] private Button notDecoratedButton;
+    [SerializeField] private Button datasetErrorButton;
 
     private Action currentOnWin;
     private Action currentOnLose;
@@ -53,6 +54,9 @@ public class TorahManager : MonoBehaviour
         if (notDecoratedButton != null)
             notDecoratedButton.onClick.AddListener(OnNotDecoratedClicked);
 
+        if (datasetErrorButton != null)
+            datasetErrorButton.onClick.AddListener(OnDatasetErrorClicked);
+
         HideOverlay();
     }
 
@@ -78,7 +82,7 @@ public class TorahManager : MonoBehaviour
             return;
         }
 
-        if (overlayPanel == null || displayedImage == null || decoratedButton == null || notDecoratedButton == null)
+        if (overlayPanel == null || displayedImage == null || decoratedButton == null || notDecoratedButton == null || datasetErrorButton == null)
         {
             Debug.LogError("UI reference missing");
             onLose?.Invoke();
@@ -189,15 +193,20 @@ public class TorahManager : MonoBehaviour
 
     public void OnDecoratedClicked()
     {
-        SaveClassification(true);
+        SaveClassification(true, false);
     }
 
     public void OnNotDecoratedClicked()
     {
-        SaveClassification(false);
+        SaveClassification(false, false);
     }
 
-    private void SaveClassification(bool isDecorated)
+    public void OnDatasetErrorClicked()
+    {
+        SaveClassification(null, true);
+    }
+
+    private void SaveClassification(bool? isDecorated, bool isDatasetError)
     {
         if (!roundRunning)
             return;
@@ -212,7 +221,8 @@ public class TorahManager : MonoBehaviour
         localClassifications.Add(new Classification
         {
             imageId = currentImage.id,
-            isDecorated = isDecorated
+            isDecorated = isDecorated,
+            isDatasetError = isDatasetError
         });
 
         currentImageIndex++;
@@ -269,6 +279,9 @@ public class TorahManager : MonoBehaviour
 
         if (notDecoratedButton != null)
             notDecoratedButton.interactable = interactable;
+
+        if (datasetErrorButton != null)
+            datasetErrorButton.interactable = interactable;
     }
 
     private void SetStatus(string message)

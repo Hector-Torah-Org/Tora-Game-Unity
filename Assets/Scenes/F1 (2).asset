@@ -16,17 +16,21 @@ MonoBehaviour:
   displayName: 
   backgrounds:
   - id: 0
-    sprite: {fileID: 7128744603280083028, guid: 279636142dbc95643beb6ff257178200, type: 3}
+    sprite: {fileID: -6898577564359491582, guid: bd93c9ee69ff80446b5e49e367fcceea, type: 3}
   defaultBackgroundIndex: 0
   arrows:
   - position: {x: 0, y: -4}
     rotationDegrees: 270
     sceneToCall: 1
     scale: 1
-  - position: {x: -3.4, y: 1}
-    rotationDegrees: 90
+  - position: {x: -4.4, y: -0.6}
+    rotationDegrees: 160
     sceneToCall: 3
-    scale: 0.6
+    scale: 0.4
+  - position: {x: 4.8, y: -0.6}
+    rotationDegrees: 50
+    sceneToCall: 20
+    scale: 0.4
   doors: []
   chests: []
   interactables: []

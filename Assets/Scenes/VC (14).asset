@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
+  m_Name: VC (14)
+  m_EditorClassIdentifier: 
+  sceneId: 14
+  displayName: 
+  backgrounds:
+  - id: background_4_A
+    sprite: {fileID: 5971717025496159645, guid: a379dd092d4f97e4db8fcfe4a48fac45, type: 3}
+  defaultBackgroundIndex: 0
+  arrows:
+  - position: {x: 0, y: -4}
+    rotationDegrees: 270
+    sceneToCall: 13
+    scale: 1
+  doors: []
+  chests:
+  - id: chest_14_A
+    position: {x: -4.4, y: -0.6}
+    scale: {x: 0.8, y: 0.8}
+    startsOpen: 0
+    contents:
+    - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
+      amount: 2
+  - id: chest_14_B
+    position: {x: 4.4, y: -0.6}
+    scale: {x: 0.8, y: 0.8}
+    startsOpen: 0
+    contents:
+    - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
+      amount: 2
+  interactables: []

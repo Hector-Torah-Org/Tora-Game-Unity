@@ -25,11 +25,11 @@ MonoBehaviour:
     scale: 1
   - position: {x: -7, y: 1}
     rotationDegrees: 90
-    sceneToCall: 12
+    sceneToCall: 11
     scale: 0.6
   - position: {x: 7.2, y: 1}
     rotationDegrees: 90
-    sceneToCall: 13
+    sceneToCall: 10
     scale: 0.6
   doors: []
   chests:

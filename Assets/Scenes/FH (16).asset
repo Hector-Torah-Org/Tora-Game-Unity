@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
+  m_Name: FH (16)
+  m_EditorClassIdentifier: 
+  sceneId: 16
+  displayName: 
+  backgrounds:
+  - id: background_6_A
+    sprite: {fileID: 5581823275019972596, guid: f55e9e4b1e6320243a59143eca5e9c76, type: 3}
+  defaultBackgroundIndex: 0
+  arrows:
+  - position: {x: -7, y: 0.5}
+    rotationDegrees: 180
+    sceneToCall: 15
+    scale: 0.9
+  doors:
+  - id: door_16_A
+    position: {x: 2.55, y: -3.08}
+    scale: {x: 1.5, y: 1.92}
+    startsOpen: 0
+    nextSceneId: 17
+    arrowRotation: 90
+    arrowScale: 0.8
+  chests:
+  - id: 
+    position: {x: 0, y: 0}
+    scale: {x: 0, y: 0}
+    startsOpen: 0
+    contents: []
+  interactables: []

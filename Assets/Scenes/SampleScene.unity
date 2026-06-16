@@ -2384,7 +2384,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e7aa147ced18f2c4487ce8595d525681, type: 2}
   - {fileID: 11400000, guid: 8f82dbe1ac8c0d44c9e7423804ae7dcb, type: 2}
   - {fileID: 11400000, guid: dcaf6fe0e0dfa0b458b84e6ad353c117, type: 2}
-  - {fileID: 11400000, guid: 89eac9002a1644946bf41379c678db83, type: 2}
+  - {fileID: 11400000, guid: c7815f3f00c9c0c45aac1599c9a341f6, type: 2}
+  - {fileID: 11400000, guid: b75db051282284a418c17d8b02ed9abe, type: 2}
+  - {fileID: 11400000, guid: cab9c233cb37f1946ad49e0720ab8886, type: 2}
+  - {fileID: 11400000, guid: b0f249801a0fa2844b2a2d1f964dcc09, type: 2}
+  - {fileID: 11400000, guid: 8cd46aed1783dc04bb4696b61f9c119e, type: 2}
+  - {fileID: 11400000, guid: 1fa9ef8bc1eb9fd4baba47dc8007d9df, type: 2}
+  - {fileID: 11400000, guid: 637b44de7b480844fa161e552e0649b1, type: 2}
+  - {fileID: 11400000, guid: 8afd3660f61383e4cbdbcd0009c7bc19, type: 2}
+  - {fileID: 11400000, guid: 16ed53c82ff62e04b911cd33d9ead981, type: 2}
 --- !u!4 &824089578
 Transform:
   m_ObjectHideFlags: 0
@@ -3794,6 +3802,14 @@ MonoBehaviour:
   targetSceneId2: 9
   newBackgroundIndex2: 1
   eventId2: scene9_special_used
+  triggerItem3: {fileID: 11400000, guid: 5323ba3a15040f4478944b0fba3ac2cc, type: 2}
+  targetSceneId3: 11
+  newBackgroundIndex3: 1
+  eventId3: scene11_special_used
+  triggerItem4: {fileID: 11400000, guid: f0e24bdd0d59e7248aed66d525dfb33f, type: 2}
+  targetSceneId4: 17
+  newBackgroundIndex4: 1
+  eventId4: scene17_special_used
 --- !u!4 &1026911557
 Transform:
   m_ObjectHideFlags: 0

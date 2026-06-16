@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
+  m_Name: FB (17)
+  m_EditorClassIdentifier: 
+  sceneId: 17
+  displayName: 
+  backgrounds:
+  - id: 0
+    sprite: {fileID: 5426386639458629695, guid: 6b328094da1a0de4e8af7947c6a35b2f, type: 3}
+  - id: 1
+    sprite: {fileID: 4179454111816849616, guid: 71d9bae0b85664d468ef07500fde132e, type: 3}
+  defaultBackgroundIndex: 0
+  arrows:
+  - position: {x: 3, y: 2}
+    rotationDegrees: 90
+    sceneToCall: 16
+    scale: 0.8
+  doors: []
+  chests: []
+  interactables: []

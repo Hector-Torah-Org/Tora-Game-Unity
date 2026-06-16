@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
+  m_Name: CT (12)
+  m_EditorClassIdentifier: 
+  sceneId: 12
+  displayName: 
+  backgrounds:
+  - id: 0
+    sprite: {fileID: -1198643303895621259, guid: e9a7dcd513a81f24bbefbd5e49c39602, type: 3}
+  defaultBackgroundIndex: 0
+  arrows:
+  - position: {x: 0, y: -4}
+    rotationDegrees: 270
+    sceneToCall: 11
+    scale: 1
+  doors: []
+  chests: []
+  interactables:
+  - id: pickaxe_trigger
+    prefab: {fileID: 5780172284917241810, guid: 4e1de688f3194ec4bbc8a4676c8ed6fc, type: 3}
+    position: {x: 4.3, y: -2.8}
+    scale: {x: 0.3, y: 0.3}
+    startsUsed: 0
+    rewardItem: {fileID: 11400000, guid: 1d885a3bfbbf7c040a5ec1f88f696a9f, type: 2}
+    rewardAmount: 1

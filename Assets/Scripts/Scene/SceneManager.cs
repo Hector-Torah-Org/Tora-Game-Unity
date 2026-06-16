@@ -97,6 +97,12 @@ public class SceneManager : MonoBehaviour
             QuestManager.Instance?.SetSceneHint("Hier kann ich nicht vorbei... vielleicht brauche ich eine Axt");
             QuestManager.Instance?.AddQuest("Finde eine Axt f�r den blockierten Weg");
         }
+
+        if (sc == 11)
+        {
+            QuestManager.Instance?.SetSceneHint("Dieses Tor scheint zu groß, um sie von Hand zu öffnen. Wenn ich nur einen Hebel hätte...");
+            QuestManager.Instance?.AddQuest("Finde einen Hebel für das Tor");
+        }
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         ApplySceneBackground(data);                                                                   // <<< NEU: Background setzen
 
@@ -121,6 +127,13 @@ public class SceneManager : MonoBehaviour
 
         foreach (var inter in data.interactables)
         {
+            int currentBackgroundIndex = GetSceneBackgroundIndex(data.sceneId, data.defaultBackgroundIndex);
+
+            if (data.sceneId == 18 && currentBackgroundIndex == 0 && inter.id == "key_trigger")
+            {
+                continue;
+            }
+
             bool isUsed = GetInteractableIsUsed(inter.id, inter.startsUsed);
             interSpawner.CreateInteractable(inter, isUsed);
         }
@@ -166,6 +179,14 @@ public class SceneManager : MonoBehaviour
         if (sc == 9 && GetSceneEventState("scene9_special_used"))
         {
             arrowSpawner.createArrow(7.3f, 2.8f, 90f, 7, 0.5f);
+        }
+        if (sc == 11 && GetSceneEventState("scene11_special_used"))
+        {
+            arrowSpawner.createArrow(0.1f, 1f, 90f, 12, 0.6f);
+        }
+        if (sc == 17 && GetSceneEventState("scene17_special_used"))
+        {
+            arrowSpawner.createArrow(-2.8f, -0.5f, 200f, 18, 0.8f);
         }
 
         Debug.Log($"Loaded scene data: {data.displayName} (id={data.sceneId})");

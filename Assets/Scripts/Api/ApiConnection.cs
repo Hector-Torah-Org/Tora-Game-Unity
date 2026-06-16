@@ -9,6 +9,7 @@ public class ApiConnection : MonoBehaviour
 {
     private const string rootUrl = "http://localhost:8080";
     public string sessionId;
+    public string userName;
 
 
     //=========================Player Actions=============================//
@@ -44,8 +45,20 @@ public class ApiConnection : MonoBehaviour
     public IEnumerator SessionLogin(string firstName, string lastName, string userName,
         System.Action<LoginResponseDTO> onSuccess, System.Action<string> onError)
     {
-        string url = rootUrl + $"/players/{firstName}/{lastName}/{userName}";
-        UnityWebRequest request = UnityWebRequest.Get(url);
+        this.userName = userName;
+        string url = rootUrl + "/players/login";
+        PlayerCreationDTO dto = new PlayerCreationDTO
+        {
+            firstName = firstName,
+            lastName = lastName,
+            userName = userName
+        };
+        string json = JsonUtility.ToJson(dto);
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
+        UnityWebRequest request = new UnityWebRequest(url, "POST");
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
         yield return request.SendWebRequest();
 
         HandleResponse<LoginResponseDTO>(request, result =>

@@ -7858,9 +7858,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1310327898}
-        m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
-        m_MethodName: ButtonSaveGame
+      - m_Target: {fileID: 1817204534}
+        m_TargetAssemblyTypeName: GameStateManager, Assembly-CSharp
+        m_MethodName: SaveToServer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

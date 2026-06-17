@@ -163,6 +163,7 @@ public class GameStateManager : MonoBehaviour
         if (parts.Length < 23)
         {
             Debug.LogError("Invalid gameState. Expected 23 parts, got " + parts.Length);
+            Debug.LogError("Received gameState: " + gameState);
             return;
         }
 

@@ -21,7 +21,7 @@ MonoBehaviour:
   arrows:
   - position: {x: 2, y: -1}
     rotationDegrees: 60
-    sceneToCall: 1
+    sceneToCall: 19
     scale: 0.6
   - position: {x: -7.8, y: -4}
     rotationDegrees: 210
@@ -53,12 +53,12 @@ MonoBehaviour:
     startsOpen: 0
     contents:
     - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
-      amount: 3
+      amount: 1
   - id: chest_13_B
     position: {x: -3.5, y: -3}
     scale: {x: 0.8, y: 0.8}
     startsOpen: 0
     contents:
     - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
-      amount: 3
+      amount: 1
   interactables: []

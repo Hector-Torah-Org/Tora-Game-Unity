@@ -103,6 +103,12 @@ public class SceneManager : MonoBehaviour
             QuestManager.Instance?.SetSceneHint("Dieses Tor scheint zu groß, um sie von Hand zu öffnen. Wenn ich nur einen Hebel hätte...");
             QuestManager.Instance?.AddQuest("Finde einen Hebel für das Tor");
         }
+
+        if (sc == 17)
+        {
+            QuestManager.Instance?.SetSceneHint("Leider scheint der Keller überflutet zu sein... ich bräuchte etwas, um das Wasser zu entfernen...");
+            QuestManager.Instance?.AddQuest("Finde einen Eimer für das Wasser");
+        }
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         ApplySceneBackground(data);                                                                   // <<< NEU: Background setzen
 
@@ -175,18 +181,22 @@ public class SceneManager : MonoBehaviour
         if (sc == 3 && GetSceneEventState("scene3_special_used"))
         {
             arrowSpawner.createArrow(1.5f, 0f, 90f, 8, 0.5f);
+            QuestManager.Instance?.CompleteQuest("Finde etwas, um Ger�ll wegzur�umen");
         }
         if (sc == 9 && GetSceneEventState("scene9_special_used"))
         {
             arrowSpawner.createArrow(7.3f, 2.8f, 90f, 7, 0.5f);
+            QuestManager.Instance?.CompleteQuest("Finde eine Axt f�r den blockierten Weg");
         }
         if (sc == 11 && GetSceneEventState("scene11_special_used"))
         {
             arrowSpawner.createArrow(0.1f, 1f, 90f, 12, 0.6f);
+            QuestManager.Instance?.CompleteQuest("Finde einen Hebel für das Tor");
         }
         if (sc == 17 && GetSceneEventState("scene17_special_used"))
         {
             arrowSpawner.createArrow(-2.8f, -0.5f, 200f, 18, 0.8f);
+            QuestManager.Instance?.CompleteQuest("Finde einen Eimer für das Wasser");
         }
 
         Debug.Log($"Loaded scene data: {data.displayName} (id={data.sceneId})");
@@ -382,5 +392,39 @@ public class SceneManager : MonoBehaviour
     public void SetInteractableUsed(string interactableId, bool used)
     {
         interactableUsedState[interactableId] = used;
+    }
+
+
+
+
+
+    public bool IsDoorOpen(string doorId)
+    {
+        return GetDoorIsOpen(doorId, false);
+    }
+
+    public bool IsChestOpen(string chestId)
+    {
+        return GetChestIsOpen(chestId, false);
+    }
+
+    public bool IsInteractableUsed(string interactableId)
+    {
+        return GetInteractableIsUsed(interactableId, false);
+    }
+
+    public bool ChestContainsItem(string chestId, ItemData item)
+    {
+        if (item == null) return false;
+
+        List<ItemStack> contents = GetChestContents(chestId, null);
+
+        foreach (var stack in contents)
+        {
+            if (stack != null && stack.item == item && stack.amount > 0)
+                return true;
+        }
+
+        return false;
     }
 }

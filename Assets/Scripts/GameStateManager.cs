@@ -115,6 +115,7 @@ public class GameStateManager : MonoBehaviour
 
     public string CreateSaveString()
     {
+        Debug.Log("CreateSaveString active");
         CreateSaveStrings();
 
         return string.Join("|",
@@ -200,6 +201,7 @@ public class GameStateManager : MonoBehaviour
 
     public void CreateSaveStrings()
     {
+        Debug.Log("CreateSaveStrings active");
         sceneV1GameState =
             "" + DoorState("door_0_A")
                + DoorState("door_0_B")
@@ -279,7 +281,7 @@ public class GameStateManager : MonoBehaviour
         sceneD1GameState =
             "" + ChestState("chest_21_A", null);         // TODO: replace null with real item
 
-        /*
+        
         Debug.Log("Inventory: " + inventoryGameState);
 
         Debug.Log("V1: " + sceneV1GameState);
@@ -305,7 +307,7 @@ public class GameStateManager : MonoBehaviour
         Debug.Log("GS: " + sceneGSGameState);
         Debug.Log("R1: " + sceneR1GameState);
         Debug.Log("D1: " + sceneD1GameState);
-        */
+        
     }
 
 

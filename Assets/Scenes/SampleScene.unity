@@ -6336,6 +6336,7 @@ MonoBehaviour:
   TutorialMenu: {fileID: 735736596}
   apiConnection: {fileID: 810143033}
   sceneManager: {fileID: 824089577}
+  gameStateManager: {fileID: 1817204534}
 --- !u!1 &1319407401
 GameObject:
   m_ObjectHideFlags: 0
@@ -7857,9 +7858,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1817204534}
-        m_TargetAssemblyTypeName: GameStateManager, Assembly-CSharp
-        m_MethodName: SaveToServer
+      - m_Target: {fileID: 1310327898}
+        m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
+        m_MethodName: ButtonSaveGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8284,7 +8285,7 @@ MonoBehaviour:
   unlockObject1: {fileID: 11400000, guid: 1d885a3bfbbf7c040a5ec1f88f696a9f, type: 2}
   axe: {fileID: 11400000, guid: bbbb56727afa02e46ab410c54b09b31e, type: 2}
   bucket: {fileID: 11400000, guid: f0e24bdd0d59e7248aed66d525dfb33f, type: 2}
-  apiConnection: {fileID: 0}
+  apiConnection: {fileID: 810143033}
 --- !u!4 &1817204535
 Transform:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   sceneId: 14
   displayName: 
   backgrounds:
-  - id: background_4_A
+  - id: background_14_A
     sprite: {fileID: 5971717025496159645, guid: a379dd092d4f97e4db8fcfe4a48fac45, type: 3}
   defaultBackgroundIndex: 0
   arrows:
@@ -29,14 +29,10 @@ MonoBehaviour:
     position: {x: -4.4, y: -0.6}
     scale: {x: 0.8, y: 0.8}
     startsOpen: 0
-    contents:
-    - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
-      amount: 2
+    contents: []
   - id: chest_14_B
     position: {x: 4.4, y: -0.6}
     scale: {x: 0.8, y: 0.8}
     startsOpen: 0
-    contents:
-    - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
-      amount: 2
+    contents: []
   interactables: []

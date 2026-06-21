@@ -8,6 +8,7 @@ public class QuestManager : MonoBehaviour
     private string sceneHint = "";
 
     private readonly List<string> activeQuests = new List<string>();
+    private readonly List<string> completedQuests = new List<string>();
 
     private void Awake()
     {
@@ -43,20 +44,25 @@ public class QuestManager : MonoBehaviour
         if (string.IsNullOrEmpty(questText))
             return;
 
+        if (completedQuests.Contains(questText))
+            return;
+
         if (!activeQuests.Contains(questText))
-        {
             activeQuests.Add(questText);
-        }
 
         UpdateQuestText();
     }
 
     public void CompleteQuest(string questText)
     {
+        if (string.IsNullOrEmpty(questText))
+            return;
+
         if (activeQuests.Contains(questText))
-        {
             activeQuests.Remove(questText);
-        }
+
+        if (!completedQuests.Contains(questText))
+            completedQuests.Add(questText);
 
         UpdateQuestText();
     }

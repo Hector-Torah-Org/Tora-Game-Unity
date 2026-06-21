@@ -15,6 +15,8 @@ public class MenuNavigation : MonoBehaviour
     [SerializeField] public GameObject TutorialMenu;
     [SerializeField] public ApiConnection apiConnection;
     [SerializeField] public SceneManager sceneManager;
+    [SerializeField] public GameStateManager gameStateManager;
+
 
 
     private List<GameObject> history = new List<GameObject>();
@@ -76,6 +78,6 @@ public class MenuNavigation : MonoBehaviour
 
     public void ButtonSaveGame()
     {
-        
+        gameStateManager.SaveToServer();
     }
 }

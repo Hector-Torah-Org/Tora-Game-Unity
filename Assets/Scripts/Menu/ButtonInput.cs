@@ -22,7 +22,15 @@ public class ButtonInput : MonoBehaviour
         string userName = userNameInput.text;
         
 
-        StartCoroutine(apiConnection.SessionLogin(firstName, lastName, userName, success => { panel.SetActive(false); }, 
+        StartCoroutine(apiConnection.SessionLogin(firstName, lastName, userName, success => 
+                                    { 
+                                        panel.SetActive(false);
+
+                                        if (GameStateManager.Instance != null)
+                                        {
+                                            GameStateManager.Instance.LoadGameStateString(success.gameState);
+                                        }
+                                    }, 
                                     error => { errorDisplay.text = error; }));
     }
 
@@ -33,7 +41,17 @@ public class ButtonInput : MonoBehaviour
         string userName = userNameInput.text;
 
         StartCoroutine(apiConnection.CreatePlayer(firstName, lastName, userName, success => {
-                        StartCoroutine(apiConnection.SessionLogin(firstName, lastName, userName, success => { panel.SetActive(false); Debug.Log("Login successful"); }, error => { errorDisplay.text = "Login failed"; })); },
+                        StartCoroutine(apiConnection.SessionLogin(firstName, lastName, userName, success => 
+                        {
+
+                            panel.SetActive(false); Debug.Log("Login successful");
+
+                            if (GameStateManager.Instance != null)
+                            {
+                                GameStateManager.Instance.LoadGameStateString(success.gameState);
+                            }
+
+                        }, error => { errorDisplay.text = "Login failed"; })); },
                         error => { errorDisplay.text = "Names already taken"; }));
 
     }

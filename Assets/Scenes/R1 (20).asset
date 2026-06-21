@@ -10,31 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
-  m_Name: FH (16)
+  m_Name: R1 (20)
   m_EditorClassIdentifier: 
-  sceneId: 16
+  sceneId: 20
   displayName: 
   backgrounds:
   - id: 0
-    sprite: {fileID: 5581823275019972596, guid: f55e9e4b1e6320243a59143eca5e9c76, type: 3}
+    sprite: {fileID: -2319590672428197637, guid: 37ae731491d5b374daa393447f1a36d6, type: 3}
   defaultBackgroundIndex: 0
   arrows:
-  - position: {x: -7, y: 0.5}
-    rotationDegrees: 180
-    sceneToCall: 15
-    scale: 0.9
-  doors:
-  - id: door_16_A
-    position: {x: 2.55, y: -3.08}
-    scale: {x: 1.5, y: 1.92}
-    startsOpen: 0
-    nextSceneId: 17
-    arrowRotation: 90
-    arrowScale: 0.8
+  - position: {x: 0, y: -4}
+    rotationDegrees: 270
+    sceneToCall: 19
+    scale: 1
+  - position: {x: 1.11, y: 0.8}
+    rotationDegrees: 330
+    sceneToCall: 21
+    scale: 0.4
+  - position: {x: 5, y: 0.3}
+    rotationDegrees: 160
+    sceneToCall: 30
+    scale: 0.4
+  doors: []
   chests:
-  - id: 
-    position: {x: 0, y: 0}
-    scale: {x: 0, y: 0}
+  - id: chest_20_A
+    position: {x: 4.8, y: -2.2}
+    scale: {x: 0.9, y: 0.9}
     startsOpen: 0
     contents: []
   interactables: []

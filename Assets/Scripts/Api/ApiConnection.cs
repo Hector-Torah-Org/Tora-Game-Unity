@@ -90,7 +90,8 @@ public class ApiConnection : MonoBehaviour
     public IEnumerator UpdateGameState(string gamestate)
     {
         string url = rootUrl + "/players/" + sessionId;
-        string gameStateJson = JsonUtility.ToJson(gamestate);
+        string gameStateJson = "\"" + gamestate + "\""; ;
+        Debug.Log("Updating game state with: " + gameStateJson);
         byte[] body = Encoding .UTF8.GetBytes(gameStateJson);
 
         UnityWebRequest request = new UnityWebRequest(url, "POST");

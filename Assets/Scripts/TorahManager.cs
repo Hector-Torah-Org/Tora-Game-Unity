@@ -203,10 +203,10 @@ public class TorahManager : MonoBehaviour
 
     public void OnDatasetErrorClicked()
     {
-        SaveClassification(null, true);
+        SaveClassification(false, true); //first parameter doesn't matter for the server when dataset error is true, but a nullable doesn't work with json utility, so we set it to false
     }
 
-    private void SaveClassification(bool? isDecorated, bool isDatasetError)
+    private void SaveClassification(bool isDecorated, bool isDatasetError)
     {
         if (!roundRunning)
             return;
@@ -224,6 +224,7 @@ public class TorahManager : MonoBehaviour
             isDecorated = isDecorated,
             isDatasetError = isDatasetError
         });
+        Debug.Log($"Classification saved: {localClassifications[localClassifications.Count - 1]}.isDecorated={localClassifications[localClassifications.Count - 1].isDecorated}, isDatasetError={localClassifications[localClassifications.Count - 1].isDatasetError}");
 
         currentImageIndex++;
         StartCoroutine(ShowCurrentImageCoroutine());
@@ -233,6 +234,10 @@ public class TorahManager : MonoBehaviour
     {
         SetStatus("Sending classifications...");
         SetButtonsInteractable(false);
+        foreach(var classification in localClassifications)
+        {
+            Debug.Log($"Classification: ImageID={classification.imageId}, IsDecorated={classification.isDecorated}, IsDatasetError={classification.isDatasetError}");
+        };
 
         yield return StartCoroutine(apiConnection.SendClassifications(localClassifications));
 

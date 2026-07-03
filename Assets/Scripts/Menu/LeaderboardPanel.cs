@@ -46,12 +46,12 @@ public class LeaderboardPanel : MonoBehaviour
         //===========Destroying old entries===========//
         foreach (LeaderboardElement entry in currentAmountEntryObjects)
         {
-            Destroy(entry.gameObject);
+            if (entry != null) Destroy(entry.gameObject);
         }
         currentAmountEntryObjects.Clear();
         foreach (LeaderboardElement entry in currentConfidenceEntryObjects)
         {
-            Destroy(entry.gameObject);
+            if (entry != null) Destroy(entry.gameObject);
         }
         currentConfidenceEntryObjects.Clear();
 
@@ -165,5 +165,28 @@ public class LeaderboardPanel : MonoBehaviour
     public void CenterConfidenceonPlayerButton()
     {
         StartCoroutine(CenterConfidenceonPlayer());
+    }
+
+    public void reloadData()
+    {
+        amountEntries.Clear();
+        confidenceEntries.Clear();
+        playerPageAmount = null;
+        playerPageConfidence = null;
+        playerRankAmount = null;
+        playerRankConfidence = null;
+        foreach (var entry in currentAmountEntryObjects)
+        {
+            if (entry != null)
+                Destroy(entry.gameObject);
+        }
+        currentAmountEntryObjects.Clear();
+
+        foreach (var entry in currentConfidenceEntryObjects)
+        {
+            if (entry != null)
+                Destroy(entry.gameObject);
+        }
+        StartCoroutine(ReloadLeaderboard());
     }
 }

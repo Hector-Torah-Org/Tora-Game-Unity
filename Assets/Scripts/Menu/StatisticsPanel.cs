@@ -94,6 +94,13 @@ public class StatisticsPanel : MonoBehaviour
         StartCoroutine(DrawGraph());
     }
 
+    public void RefreshData()
+    {
+        confidenceDataRaw.Clear();
+        amountDataRaw.Clear();
+        StartCoroutine(DrawGraph());
+    }
+
     public IEnumerator DrawGraph()
     {
         YearText.text = year.ToString();

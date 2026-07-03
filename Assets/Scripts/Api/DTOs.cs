@@ -43,7 +43,7 @@ public class ImageResponseListDTO
 public class Classification
 {
     public string imageId;
-    public bool? isDecorated;
+    public bool isDecorated;
     public bool isDatasetError;
 }
 

@@ -125,7 +125,7 @@ public class ApiConnection : MonoBehaviour
     public IEnumerator SendClassifications(List<Classification> classifications)
     {
         string url = rootUrl + "/image/" + sessionId;
-        Debug.Log("Classifications: " + classifications[1]);
+        Debug.Log("Classifications: " + JsonUtility.ToJson(classifications[1]));
         ClassificationSendDTO classificationsDto = new ClassificationSendDTO() { classifications = classifications };
         string classificationsJson = JsonUtility.ToJson(classificationsDto);
         classificationsJson = classificationsJson.Replace("{\"classifications\":", "").TrimEnd('}');

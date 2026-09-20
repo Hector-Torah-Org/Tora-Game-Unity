@@ -1,7 +1,5 @@
-using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 public class PlayerCreationDTO
 {
@@ -14,6 +12,7 @@ public class LoginResponseDTO
 {
     public string sessionUUID;
     public string gameState;
+    public bool hasPassedTutorial;
 }
 
 public class PlayerResponseDTO
@@ -73,4 +72,11 @@ public class LeaderboardDTO
         public int place;
         public string score;
     }
+}
+
+[Serializable]
+public class tutorialRoundAnswerDTO
+{
+    public double correctAnswerRate;
+    public bool passedTutorial;
 }

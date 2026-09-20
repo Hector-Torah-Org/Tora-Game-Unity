@@ -27,7 +27,7 @@ public class MenuNavigation : MonoBehaviour
         if (EventSystem.current.currentSelectedGameObject != null) { 
             return;
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.M))
         {
             GoBack();
         }

@@ -31,5 +31,11 @@ MonoBehaviour:
     nextSceneId: 16
     arrowRotation: 90
     arrowScale: 0.4
-  chests: []
+  chests:
+  - id: chest_15_A
+    prefab: {fileID: 5081569631983844336, guid: dc0dce0a823e6e3499340582678e2638, type: 3}
+    position: {x: -3.7, y: -1.5}
+    scale: {x: 0.5, y: 0.5}
+    startsOpen: 0
+    contents: []
   interactables: []

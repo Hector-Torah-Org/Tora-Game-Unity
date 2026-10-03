@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
+  m_Name: V2 (23)
+  m_EditorClassIdentifier: 
+  sceneId: 23
+  displayName: 
+  backgrounds:
+  - id: 0
+    sprite: {fileID: -3580445317278905642, guid: 79968983e642d1640a5b360af8887e25, type: 3}
+  defaultBackgroundIndex: 0
+  arrows:
+  - position: {x: 7.8, y: -4}
+    rotationDegrees: 330
+    sceneToCall: 0
+    scale: 1
+  - position: {x: -7.8, y: -4}
+    rotationDegrees: 210
+    sceneToCall: 13
+    scale: 1
+  doors:
+  - id: door_23_A
+    position: {x: -4.05, y: -1.75}
+    scale: {x: 1.5, y: 1.6}
+    startsOpen: 0
+    nextSceneId: 24
+    arrowRotation: 90
+    arrowScale: 0.5
+  - id: door_23_B
+    position: {x: 5.22, y: -1.8}
+    scale: {x: 1.4, y: 1.5}
+    startsOpen: 0
+    nextSceneId: 40
+    arrowRotation: 90
+    arrowScale: 0.6
+  chests:
+  - id: chest_23_A
+    prefab: {fileID: 5081569631983844336, guid: dc0dce0a823e6e3499340582678e2638, type: 3}
+    position: {x: 2.2, y: -2.8}
+    scale: {x: 0.7, y: 0.7}
+    startsOpen: 0
+    contents: []
+  - id: chest_23_B
+    prefab: {fileID: 0}
+    position: {x: -2, y: -2.8}
+    scale: {x: 0.9, y: 0.9}
+    startsOpen: 0
+    contents:
+    - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
+      amount: 1
+  interactables: []

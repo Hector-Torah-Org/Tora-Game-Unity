@@ -26,13 +26,19 @@ MonoBehaviour:
   doors: []
   chests:
   - id: chest_14_A
+    prefab: {fileID: 0}
     position: {x: -4.4, y: -0.6}
     scale: {x: 0.8, y: 0.8}
     startsOpen: 0
-    contents: []
+    contents:
+    - item: {fileID: 11400000, guid: 393504852adcf3c479cf8e1b52b63225, type: 2}
+      amount: 1
   - id: chest_14_B
+    prefab: {fileID: 0}
     position: {x: 4.4, y: -0.6}
     scale: {x: 0.8, y: 0.8}
     startsOpen: 0
-    contents: []
+    contents:
+    - item: {fileID: 11400000, guid: 95829dd8c4f3f19499373328ae32510f, type: 2}
+      amount: 1
   interactables: []

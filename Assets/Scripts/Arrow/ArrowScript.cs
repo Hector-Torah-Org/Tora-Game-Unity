@@ -45,11 +45,24 @@ public class ArrowScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (SceneManager.Instance != null && SceneManager.Instance.IsUIBlockingWorldInput)
+        if (SceneManager.Instance != null &&
+        SceneManager.Instance.IsUIBlockingWorldInput)
             return;
 
-        SceneManager.Instance.ChangeScene(SceneToCall);                                    // Wenn der Arrow geklickt wird, ruft es im SceneManager die Funktion auf und wechselt die Scene
-        
+        if (SceneTransition.Instance != null)
+        {
+            SceneTransition.Instance.TransitionToScene(
+                SceneToCall,
+                transform.position
+            );
+        }
+        else
+        {
+            SceneManager.Instance.ChangeScene(SceneToCall);
+        }
+
+        // Wenn der Arrow geklickt wird, ruft es im SceneManager die Funktion auf und wechselt die Scene. Jetzt aktiviert er auch die transition.
+
     }
 }
 

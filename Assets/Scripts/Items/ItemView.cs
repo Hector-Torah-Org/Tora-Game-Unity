@@ -49,12 +49,23 @@ public class ItemView : MonoBehaviour
 
         if (location == ItemLocation.Inventory)
         {
+
+            if (stack.item.isReadable)
+            {
+                if (ReadableItemUI.Instance != null)
+                {
+                    ReadableItemUI.Instance.Open(stack.item);
+                }
+
+                return;
+            }
+
+
             bool used = ItemUseSystem.Instance != null && ItemUseSystem.Instance.TryUse(stack);
 
-            if (used)                                                                                        //probiert item zu nutzen
+            if (used)
             {
                 inventoryOwner?.RemoveItem(stack);
-                
             }
         }
     }

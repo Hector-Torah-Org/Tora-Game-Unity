@@ -12,21 +12,21 @@ public class ChestUI : MonoBehaviour
 
     private ChestScript currentChest;
 
+
+    public bool IsOpen
+    {
+        get
+        {
+            return chestPanel != null && chestPanel.gameObject.activeSelf;
+        }
+    }
+
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
     }
 
-    private void Update()
-    {
-        if (chestPanel == null) return;
-    
-        if (chestPanel.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Escape))
-        {
-            Close();
-        }
-    }
 
     public void Open(ChestScript chest, List<ItemStack> contents)
     {

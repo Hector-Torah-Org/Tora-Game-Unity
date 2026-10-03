@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
+  m_Name: GRD2 (38)
+  m_EditorClassIdentifier: 
+  sceneId: 38
+  displayName: 
+  backgrounds:
+  - id: 0
+    sprite: {fileID: 7151311970195090872, guid: 9e16bf9b297183f4f85fabccba0d2fce, type: 3}
+  - id: 1
+    sprite: {fileID: -4021468442220948672, guid: 459abce8c53456b47beab814edf82e2c, type: 3}
+  defaultBackgroundIndex: 0
+  arrows:
+  - position: {x: 0, y: -4}
+    rotationDegrees: 270
+    sceneToCall: 37
+    scale: 0.9
+  doors: []
+  chests: []
+  interactables:
+  - id: bridge_restorer_trigger
+    prefab: {fileID: 5780172284917241810, guid: b260413feccabf04aba0f3fe8c043779, type: 3}
+    position: {x: -5.5, y: -1}
+    scale: {x: 0.14, y: 0.13}
+    startsUsed: 0
+    rewardItem: {fileID: 11400000, guid: e1f0b1d5d7cbc4e4fb6ab214ea9976d5, type: 2}
+    rewardAmount: 1

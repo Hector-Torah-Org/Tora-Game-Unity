@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
+  m_Name: WH (25)
+  m_EditorClassIdentifier: 
+  sceneId: 25
+  displayName: 
+  backgrounds:
+  - id: 0
+    sprite: {fileID: 3283514385465093049, guid: 42748926747ad9d40b736023a9d98682, type: 3}
+  defaultBackgroundIndex: 0
+  arrows:
+  - position: {x: 0, y: -4}
+    rotationDegrees: 270
+    sceneToCall: 22
+    scale: 1
+  doors:
+  - id: door_25_A
+    position: {x: 0, y: -0.6}
+    scale: {x: 1.3, y: 1.67}
+    startsOpen: 0
+    nextSceneId: 29
+    arrowRotation: 90
+    arrowScale: 0.5
+  chests: []
+  interactables: []

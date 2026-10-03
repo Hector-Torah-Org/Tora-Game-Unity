@@ -9,7 +9,9 @@ public class ChestSpawner : MonoBehaviour
 
     public ChestScript CreateChest(ChestSpawnData data, bool isOpen, List<ItemStack> contents)
     {
-        ChestScript chest = Instantiate(chestPrefab);
+        ChestScript prefabToUse = data.prefab != null ? data.prefab : chestPrefab;
+
+        ChestScript chest = Instantiate(prefabToUse);
         chest.Init(data, isOpen, contents);
 
         spawned.Add(chest);

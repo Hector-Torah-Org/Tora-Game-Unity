@@ -16,35 +16,36 @@ MonoBehaviour:
   displayName: 
   backgrounds:
   - id: background_1_A
-    sprite: {fileID: 4963781718144634110, guid: c79167b302bc39045892820309434764, type: 3}
+    sprite: {fileID: 580618476757223059, guid: e86a6c882cfb3f445801b3a791ace744, type: 3}
   defaultBackgroundIndex: 0
   arrows:
   - position: {x: 1, y: -4}
     rotationDegrees: 270
     sceneToCall: 0
     scale: 1
-  - position: {x: 2, y: 0.8}
-    rotationDegrees: 40
+  - position: {x: 4, y: 0.8}
+    rotationDegrees: 15
     sceneToCall: 2
     scale: 0.4
-  - position: {x: 8.2, y: 0.7}
+  - position: {x: 8, y: 0.7}
     rotationDegrees: 20
     sceneToCall: 9
     scale: 0.7
   doors:
   - id: door_1_A
-    position: {x: -5.45, y: -0.04}
-    scale: {x: 0.8, y: 1.08}
+    position: {x: -3.21, y: 0.09}
+    scale: {x: 0.7, y: 0.96}
     startsOpen: 0
     nextSceneId: 6
     arrowRotation: 90
     arrowScale: 0.5
   chests:
   - id: chest_1_A
-    position: {x: -6.9, y: -0.9}
-    scale: {x: 0.6, y: 0.6}
+    prefab: {fileID: 5081569631983844336, guid: dc0dce0a823e6e3499340582678e2638, type: 3}
+    position: {x: -6.7, y: -0.35}
+    scale: {x: 0.4, y: 0.4}
     startsOpen: 0
     contents:
     - item: {fileID: 11400000, guid: 913b0d70a41993f498b95000134b643e, type: 2}
-      amount: 3
+      amount: 1
   interactables: []

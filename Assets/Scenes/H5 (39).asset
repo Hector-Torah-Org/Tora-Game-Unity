@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
+  m_Name: H5 (39)
+  m_EditorClassIdentifier: 
+  sceneId: 39
+  displayName: 
+  backgrounds:
+  - id: background_39_A
+    sprite: {fileID: 6179571938496437680, guid: 1379fa70d3deaaa4080525c2123eff55, type: 3}
+  defaultBackgroundIndex: 0
+  arrows:
+  - position: {x: 0, y: -4}
+    rotationDegrees: 270
+    sceneToCall: 13
+    scale: 1
+  doors: []
+  chests:
+  - id: chest_39_A
+    prefab: {fileID: 5081569631983844336, guid: 8b45cd2a137e8a44db7e064b79966cd8, type: 3}
+    position: {x: 3.3, y: -0.6}
+    scale: {x: 0.65, y: 0.7}
+    startsOpen: 0
+    contents:
+    - item: {fileID: 11400000, guid: b74cefcabe2f47e43b996ee86bcd5a9c, type: 2}
+      amount: 1
+  interactables: []

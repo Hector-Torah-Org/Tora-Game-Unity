@@ -85,30 +85,87 @@ public class SceneManager : MonoBehaviour
 
         currentSceneId = sc;
 
+        int currentBackgroundIndex = GetSceneBackgroundIndex(data.sceneId, data.defaultBackgroundIndex);
+
         //----------------------------------------------------------------- H I E R  K O M M E N  D I E  Q U E S T S  H I N -----------------------------------------------------------------
-        if (sc == 3)
+        if (sc == 3 && currentBackgroundIndex == 0)
         {
-            QuestManager.Instance?.SetSceneHint("Ich muss einen Weg finden, das Ger�ll wegzur�umen...");
-            QuestManager.Instance?.AddQuest("Finde etwas, um Ger�ll wegzur�umen");
+            QuestManager.Instance?.SetSceneHint("The rubble is blocking the path! If only I had something to break it...");
+            QuestManager.Instance?.AddQuest("Find something to remove the rubble");
         }
 
-        if (sc == 9)
+        if (sc == 9 && currentBackgroundIndex == 0)
         {
-            QuestManager.Instance?.SetSceneHint("Hier kann ich nicht vorbei... vielleicht brauche ich eine Axt");
-            QuestManager.Instance?.AddQuest("Finde eine Axt f�r den blockierten Weg");
+            QuestManager.Instance?.SetSceneHint("The mine seems to be nailed shut. How could I break these planks...");
+            QuestManager.Instance?.AddQuest("Use some tool to break the planks");
         }
 
-        if (sc == 11)
+        if (sc == 11 && currentBackgroundIndex == 0)
         {
-            QuestManager.Instance?.SetSceneHint("Dieses Tor scheint zu groß, um sie von Hand zu öffnen. Wenn ich nur einen Hebel hätte...");
-            QuestManager.Instance?.AddQuest("Finde einen Hebel für das Tor");
+            QuestManager.Instance?.SetSceneHint("That pedestal seems to need something.");
+            QuestManager.Instance?.AddQuest("Find something for the pedestal");
         }
 
-        if (sc == 17)
+        if (sc == 17 && currentBackgroundIndex == 0)
         {
-            QuestManager.Instance?.SetSceneHint("Leider scheint der Keller überflutet zu sein... ich bräuchte etwas, um das Wasser zu entfernen...");
-            QuestManager.Instance?.AddQuest("Finde einen Eimer für das Wasser");
+            QuestManager.Instance?.SetSceneHint("So much water! I need to find something to remove it!");
+            QuestManager.Instance?.AddQuest("Remove the water");
         }
+
+        if (sc == 8 && currentBackgroundIndex == 0)
+        {
+            QuestManager.Instance?.SetSceneHint("There seems to have been a bridge across the river here.");
+            QuestManager.Instance?.AddQuest("Find something magical to restore the bridge");
+        }
+
+        if (sc == 18 && currentBackgroundIndex == 0)
+        {
+            QuestManager.Instance?.SetSceneHint("I need to lift this tile.");
+            QuestManager.Instance?.AddQuest("Lift the tile using a tool");
+        }
+
+        if (sc == 22 && currentBackgroundIndex == 0)
+        {
+            QuestManager.Instance?.SetSceneHint("These damn vines are blocking my way!");
+            QuestManager.Instance?.AddQuest("Remove the vines using something sharp");
+        }
+
+        if (sc == 19 && currentBackgroundIndex == 0)
+        {
+            QuestManager.Instance?.SetSceneHint("This gate seems ominous. Something ominous would probably open it...");
+            QuestManager.Instance?.AddQuest("Find something ominous fitting a graveyard");
+        }
+
+        if (sc == 36 && currentBackgroundIndex == 0)
+        {
+            QuestManager.Instance?.SetSceneHint("The symbol on this stone gate seems familiar. I could swear i have seen it before at the church.");
+            QuestManager.Instance?.AddQuest("Use an item with the symbol on it");
+        }
+
+        if (sc == 37 && currentBackgroundIndex == 0)
+        {
+            QuestManager.Instance?.SetSceneHint("Another symbol...");
+            QuestManager.Instance?.AddQuest("Find a talisman with a skull on it");
+        }
+
+        if (sc == 38 && currentBackgroundIndex == 0)
+        {
+            QuestManager.Instance?.SetSceneHint("That glowing symbol...");
+            QuestManager.Instance?.AddQuest("Find a talisman with a tree symbol");
+        }
+
+        if (sc == 21 && currentBackgroundIndex == 0)
+        {
+            QuestManager.Instance?.SetSceneHint("That big gate is locked...");
+            QuestManager.Instance?.AddQuest("Get a key for the dungeon gate");
+        }
+
+        if (sc == 26 && currentBackgroundIndex == 0)
+        {
+            QuestManager.Instance?.SetSceneHint("I can see something up there on the left! Oh, but there is no rope...");
+            QuestManager.Instance?.AddQuest("Use a rope to get up there");
+        }
+
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         ApplySceneBackground(data);                                                                   // <<< NEU: Background setzen
 
@@ -133,7 +190,7 @@ public class SceneManager : MonoBehaviour
 
         foreach (var inter in data.interactables)
         {
-            int currentBackgroundIndex = GetSceneBackgroundIndex(data.sceneId, data.defaultBackgroundIndex);
+            
 
             if (data.sceneId == 18 && currentBackgroundIndex == 0 && inter.id == "key_trigger")
             {
@@ -181,22 +238,62 @@ public class SceneManager : MonoBehaviour
         if (sc == 3 && GetSceneEventState("scene3_special_used"))
         {
             arrowSpawner.createArrow(1.5f, 0f, 90f, 8, 0.5f);
-            QuestManager.Instance?.CompleteQuest("Finde etwas, um Ger�ll wegzur�umen");
+            QuestManager.Instance?.CompleteQuest("Find something to remove the rubble");
         }
         if (sc == 9 && GetSceneEventState("scene9_special_used"))
         {
-            arrowSpawner.createArrow(7.3f, 2.8f, 90f, 7, 0.5f);
-            QuestManager.Instance?.CompleteQuest("Finde eine Axt f�r den blockierten Weg");
+            arrowSpawner.createArrow(6.3f, 1.5f, -20f, 7, 0.5f);
+            QuestManager.Instance?.CompleteQuest("Use some tool to break the planks");
         }
         if (sc == 11 && GetSceneEventState("scene11_special_used"))
         {
             arrowSpawner.createArrow(0.1f, 1f, 90f, 12, 0.6f);
-            QuestManager.Instance?.CompleteQuest("Finde einen Hebel für das Tor");
+            QuestManager.Instance?.CompleteQuest("Find something for the pedestal");
         }
         if (sc == 17 && GetSceneEventState("scene17_special_used"))
         {
             arrowSpawner.createArrow(-2.8f, -0.5f, 200f, 18, 0.8f);
-            QuestManager.Instance?.CompleteQuest("Finde einen Eimer für das Wasser");
+            QuestManager.Instance?.CompleteQuest("Remove the water");
+        }
+        if (sc == 22 && GetSceneEventState("scene22_special_used"))
+        {
+            arrowSpawner.createArrow(0.8f, -0.5f, 90f, 25, 0.6f);
+            QuestManager.Instance?.CompleteQuest("Remove the vines using something sharp");
+        }
+        if (sc == 21 && GetSceneEventState("scene21_special_used"))
+        {
+            arrowSpawner.createArrow(-6.5f, -0.5f, 90f, 26, 0.6f);
+            QuestManager.Instance?.CompleteQuest("Get a key for the dungeon gate"); 
+        }
+        if (sc == 26 && GetSceneEventState("scene26_special_used"))
+        {
+            arrowSpawner.createArrow(-6f, -0.5f, 90f, 27, 0.6f);
+            QuestManager.Instance?.CompleteQuest("Use a rope to get up there");
+        }
+        if (sc == 19 && GetSceneEventState("scene19_special_used"))
+        {
+            arrowSpawner.createArrow(4f, -0.5f, 60f, 30, 0.6f);
+            QuestManager.Instance?.CompleteQuest("Find something ominous fitting a graveyard");
+        }
+        if (sc == 36 && GetSceneEventState("scene36_special_used"))
+        {
+            arrowSpawner.createArrow(2f, 1f, 90f, 37, 0.7f);
+            QuestManager.Instance?.CompleteQuest("Use an item with the symbol on it");
+        }
+        if (sc == 37 && GetSceneEventState("scene37_special_used"))
+        {
+            arrowSpawner.createArrow(0f, -1f, 90f, 38, 0.7f);
+            QuestManager.Instance?.CompleteQuest("Find a talisman with a skull on it");
+        }
+        if (sc == 8 && GetSceneEventState("scene8_special_used"))
+        {
+            arrowSpawner.createArrow(2f, 1f, 35f, 33, 0.7f);
+            QuestManager.Instance?.CompleteQuest("Find something magical to restore the bridge");
+        }
+        // hmm---------------------------------------------------------------------------------------------
+        if (sc == 38 && GetSceneEventState("scene38_special_used"))
+        {
+            QuestManager.Instance?.CompleteQuest("Find a talisman with a tree symbol");
         }
 
         Debug.Log($"Loaded scene data: {data.displayName} (id={data.sceneId})");

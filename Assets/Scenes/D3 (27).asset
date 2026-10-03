@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
+  m_Name: D3 (27)
+  m_EditorClassIdentifier: 
+  sceneId: 27
+  displayName: 
+  backgrounds:
+  - id: 0
+    sprite: {fileID: -3461678499091593773, guid: b3922e60aba265f4a9b8f45cf2e57dc6, type: 3}
+  defaultBackgroundIndex: 0
+  arrows:
+  - position: {x: 0, y: -4}
+    rotationDegrees: 270
+    sceneToCall: 26
+    scale: 1
+  doors: []
+  chests: []
+  interactables:
+  - id: cursed_coin_trigger
+    prefab: {fileID: 5780172284917241810, guid: e9ea0ccc66a5f8446a90fb990033d08b, type: 3}
+    position: {x: 5, y: -3.5}
+    scale: {x: 0.3, y: 0.3}
+    startsUsed: 0
+    rewardItem: {fileID: 11400000, guid: cd6e46d6b3d7f964b95c152e87dbd544, type: 2}
+    rewardAmount: 1

@@ -4070,7 +4070,6 @@ MonoBehaviour:
   fadeStartPoint: 0.2
   fadeToBlackDuration: 0.4
   fadeFromBlackDuration: 0.6
---- !u!1 &840965169
 --- !u!1 &826477418
 GameObject:
   m_ObjectHideFlags: 0

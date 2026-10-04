@@ -28,10 +28,9 @@ public class MenuNavigation : MonoBehaviour
         {
             return;
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            if (ChestUI.Instance != null && ChestUI.Instance.IsOpen)            // sorry hab in deinen code eingegriffen. davor hat sich immer das menü geöffnet wenn man eine chest schließen wollte
+            if (ChestUI.Instance != null && ChestUI.Instance.IsOpen)            // sorry hab in deinen code eingegriffen. davor hat sich immer das menï¿½ geï¿½ffnet wenn man eine chest schlieï¿½en wollte
             {
                 ChestUI.Instance.Close();
                 return;

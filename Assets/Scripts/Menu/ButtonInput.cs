@@ -15,6 +15,8 @@ public class ButtonInput : MonoBehaviour
 
     public TMP_Text errorDisplay;
 
+    public TutorialRound tutorialRound;
+
     public void LoginClicked()
     {
         string firstName = firstNameInput.text;
@@ -26,6 +28,12 @@ public class ButtonInput : MonoBehaviour
                                     { 
                                         panel.SetActive(false);
 
+                                        if (!success.hasPassedTutorial)
+                                        {
+                                            Debug.Log("Start Tutorial");
+                                            tutorialRound.StartTutorialRound();
+                                        }
+                                        
                                         if (GameStateManager.Instance != null)
                                         {
                                             GameStateManager.Instance.LoadGameStateString(success.gameState);
@@ -46,11 +54,15 @@ public class ButtonInput : MonoBehaviour
 
                             panel.SetActive(false); Debug.Log("Login successful");
 
+                            if (!success.hasPassedTutorial)
+                            {
+                                tutorialRound.StartTutorialRound();
+                            }
+
                             if (GameStateManager.Instance != null)
                             {
                                 GameStateManager.Instance.LoadGameStateString(success.gameState);
                             }
-
                         }, error => { errorDisplay.text = "Login failed"; })); },
                         error => { errorDisplay.text = "Names already taken"; }));
 

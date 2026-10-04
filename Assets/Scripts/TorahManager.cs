@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.U2D;
 using UnityEngine.UI;
-using TMPro;
 
 public class TorahManager : MonoBehaviour
 {
@@ -32,7 +33,11 @@ public class TorahManager : MonoBehaviour
     private readonly List<Classification> localClassifications = new List<Classification>();
     private List<ImageResponseListDTO.ImageResponseDTO> currentImages = new List<ImageResponseListDTO.ImageResponseDTO>();
     private int currentImageIndex = 0;
+    private List<Sprite> imageSprites = new List<Sprite>();
     private bool roundRunning = false;
+
+    private bool isTutorialRound = false;
+    private tutorialRoundAnswerDTO tutorialRoundResult;
 
     private void Awake()
     {
@@ -108,16 +113,40 @@ public class TorahManager : MonoBehaviour
         StartCoroutine(BeginRoundCoroutine());
     }
 
+    public IEnumerator StartTutorialRound(Action<tutorialRoundAnswerDTO> onResult)
+    {
+        isTutorialRound = true;
+        StartRound(() => { }, () => { StartCoroutine(StartTutorialRound(onResult)); });
+
+        yield return new WaitUntil(() => !roundRunning);
+
+        Debug.Log($"Tutorial round result: {tutorialRoundResult.correctAnswerRate} {tutorialRoundResult.passedTutorial}");
+
+        onResult?.Invoke(tutorialRoundResult);
+    }
+
     private IEnumerator BeginRoundCoroutine()
     {
         bool callbackReceived = false;
         ImageResponseListDTO response = null;
 
-        yield return StartCoroutine(apiConnection.GetImage(imagesPerRound, result =>
+        if (!isTutorialRound)
         {
-            response = result;
-            callbackReceived = true;
-        }));
+            yield return StartCoroutine(apiConnection.GetImage(imagesPerRound, result =>
+            {
+                response = result;
+                callbackReceived = true;
+            }));
+        }
+
+        if (isTutorialRound)
+        {
+            yield return StartCoroutine(apiConnection.GetTestImage(imagesPerRound, result =>
+            {
+                response = result;
+                callbackReceived = true;
+            }));
+        }
 
         if (!callbackReceived || response == null || response.images == null || response.images.Count == 0)
         {
@@ -128,8 +157,21 @@ public class TorahManager : MonoBehaviour
 
         currentImages = response.images;
         currentImageIndex = 0;
-
+        imageSprites.Clear();
+        for (int i = 0; i < currentImages.Count; i++)
+        {
+            imageSprites.Add(null);
+        }
+        GetImageSprites(currentImages);
         yield return StartCoroutine(ShowCurrentImageCoroutine());
+    }
+
+    private void GetImageSprites(List<ImageResponseListDTO.ImageResponseDTO> images)
+    {
+        for (int i = 0;i < images.Count;i++)
+        {
+            StartCoroutine(LoadImageFromUrl(images[i].link, i));
+        }
     }
 
     private IEnumerator ShowCurrentImageCoroutine()
@@ -147,7 +189,10 @@ public class TorahManager : MonoBehaviour
         SetCounter($"Image {currentImageIndex + 1} / {currentImages.Count}");
         SetCharacter(currentImage.character);
 
-        yield return StartCoroutine(LoadImageFromUrl(currentImage.link));
+        yield return new WaitUntil(() => imageSprites[currentImageIndex] != null);
+        displayedImage.sprite = imageSprites[currentImageIndex];
+        displayedImage.preserveAspect = true;
+        displayedImage.color = Color.white;
 
         if (!roundRunning)
         {
@@ -158,7 +203,7 @@ public class TorahManager : MonoBehaviour
         SetButtonsInteractable(true);
     }
 
-    private IEnumerator LoadImageFromUrl(string imageUrl)
+    private IEnumerator LoadImageFromUrl(string imageUrl, int index)
     {
         using (UnityWebRequest request = UnityWebRequestTexture.GetTexture(imageUrl))
         {
@@ -166,7 +211,7 @@ public class TorahManager : MonoBehaviour
 
             if (request.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError("TorahManager: Failed to load image: " + request.error);
+                Debug.LogError("TorahManager: Failed to load image " + imageUrl + ": " + request.error);
                 FailRound();
                 yield break;
             }
@@ -184,10 +229,7 @@ public class TorahManager : MonoBehaviour
                 new Rect(0, 0, texture.width, texture.height),
                 new Vector2(0.5f, 0.5f)
             );
-
-            displayedImage.sprite = sprite;
-            displayedImage.preserveAspect = true;
-            displayedImage.color = Color.white;
+            imageSprites[index] = sprite;
         }
     }
 
@@ -239,13 +281,23 @@ public class TorahManager : MonoBehaviour
             Debug.Log($"Classification: ImageID={classification.imageId}, IsDecorated={classification.isDecorated}, IsDatasetError={classification.isDatasetError}");
         };
 
-        yield return StartCoroutine(apiConnection.SendClassifications(localClassifications));
-
+        if (!isTutorialRound)
+        {
+            yield return StartCoroutine(apiConnection.SendClassifications(localClassifications));
+        }
+        else
+        {
+            yield return StartCoroutine(apiConnection.SendTestClassifications(localClassifications, (onSuccess) =>
+            {
+                tutorialRoundResult = onSuccess;
+            }));
+        }
         Debug.Log("TorahManager: Classifications sent.");
 
         localClassifications.Clear();
         currentImages.Clear();
         currentImageIndex = 0;
+        isTutorialRound = false;
         roundRunning = false;
 
         HideOverlay();

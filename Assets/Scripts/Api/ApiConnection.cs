@@ -7,7 +7,17 @@ using System;
 
 public class ApiConnection : MonoBehaviour
 {
-    private const string rootUrl = "http://localhost:8080";
+    private string rootUrl = GetRootUrl();
+
+    private static string GetRootUrl()
+    {
+    #if UNITY_EDITOR
+    return "http://localhost:8080/";
+    #elif UNITY_WEBGL
+    return "";
+    #endif
+    }
+
     public string sessionId;
     public string userName;
 
@@ -26,7 +36,7 @@ public class ApiConnection : MonoBehaviour
         };
 
         string json = JsonUtility.ToJson(dto);
-        string url = rootUrl + "/players";
+        string url = rootUrl + "players";
 
         UnityWebRequest request = new UnityWebRequest(url, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
@@ -46,7 +56,7 @@ public class ApiConnection : MonoBehaviour
         System.Action<LoginResponseDTO> onSuccess, System.Action<string> onError)
     {
         this.userName = userName;
-        string url = rootUrl + "/players/login";
+        string url = rootUrl + "players/login";
         PlayerCreationDTO dto = new PlayerCreationDTO
         {
             firstName = firstName,
@@ -71,7 +81,7 @@ public class ApiConnection : MonoBehaviour
 
     public IEnumerator UpdatePlayer(string newFirstName, string newLastName, string newUserName, System.Action<PlayerResponseDTO> onSuccess, System.Action<string> onError)
     {
-        string url = rootUrl + "/players/" + sessionId;
+        string url = rootUrl + "players/" + sessionId;
         PlayerCreationDTO updatedPlayerDto = new PlayerCreationDTO() { 
             firstName = newFirstName,
             lastName = newLastName,
@@ -89,7 +99,7 @@ public class ApiConnection : MonoBehaviour
 
     public IEnumerator UpdateGameState(string gamestate)
     {
-        string url = rootUrl + "/players/" + sessionId;
+        string url = rootUrl + "players/" + sessionId;
         string gameStateJson = "\"" + gamestate + "\""; ;
         Debug.Log("Updating game state with: " + gameStateJson);
         byte[] body = Encoding .UTF8.GetBytes(gameStateJson);
@@ -108,7 +118,7 @@ public class ApiConnection : MonoBehaviour
 
     public IEnumerator GetImage(int amount, System.Action<ImageResponseListDTO> onSuccess)
     {
-        string url = rootUrl + "/image/" + sessionId + "/" + amount;
+        string url = rootUrl + "image/" + sessionId + "/" + amount;
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
         HandleResponse(request, onSuccess, error => Debug.LogError(error));
@@ -116,7 +126,7 @@ public class ApiConnection : MonoBehaviour
 
     public IEnumerator GetTestImage(int amount, System.Action<ImageResponseListDTO> onSuccess)
     {
-        string url = rootUrl + "/image/" + sessionId + "/" + amount + "?forTutorial=true";
+        string url = rootUrl + "image/" + sessionId + "/" + amount + "?forTutorial=true";
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
         HandleResponse(request, onSuccess, error => Debug.LogError(error));
@@ -124,7 +134,7 @@ public class ApiConnection : MonoBehaviour
 
     public IEnumerator SendClassifications(List<Classification> classifications)
     {
-        string url = rootUrl + "/image/" + sessionId;
+        string url = rootUrl + "image/" + sessionId;
         Debug.Log("Classifications: " + JsonUtility.ToJson(classifications[1]));
         ClassificationSendDTO classificationsDto = new ClassificationSendDTO() { classifications = classifications };
         string classificationsJson = JsonUtility.ToJson(classificationsDto);
@@ -144,9 +154,9 @@ public class ApiConnection : MonoBehaviour
 
     
     
-    public IEnumerator SendTestClassifications(List<Classification> classifications, System.Action<double> onSuccess)
+    public IEnumerator SendTestClassifications(List<Classification> classifications, System.Action<tutorialRoundAnswerDTO> onSuccess)
     {
-        string url = rootUrl + "/image/" + sessionId + "?giveFeedback=true";
+        string url = rootUrl + "image/" + sessionId + "?giveFeedback=true";
         Debug.Log("Classifications: " + classifications[1]);
         ClassificationSendDTO classificationsDto = new ClassificationSendDTO() { classifications = classifications };
         string classificationsJson = JsonUtility.ToJson(classificationsDto);
@@ -161,14 +171,14 @@ public class ApiConnection : MonoBehaviour
 
         yield return request.SendWebRequest();
 
-        HandleResponse<double>(request, result => { Debug.Log(result); onSuccess?.Invoke(result); }, error => Debug.LogError(error));
+        HandleResponse<tutorialRoundAnswerDTO>(request, result => { Debug.Log(result); onSuccess?.Invoke(result); }, error => Debug.LogError(error));
     }
 
     //=================================Statistics actions=============================//
 
     public IEnumerator GetAmountStatistic(int year, System.Action<StatisticsDTO> onSuccess)
     {
-        string url = rootUrl + $"/Statistics/playerAmount/{sessionId}/{year}";
+        string url = rootUrl + $"Statistics/playerAmount/{sessionId}/{year}";
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
         Debug.Log("Received response: " + request.downloadHandler.text);
@@ -177,7 +187,7 @@ public class ApiConnection : MonoBehaviour
 
     public IEnumerator GetConfidenceStatistic(int year, System.Action<StatisticsDTO> onSuccess)
     {
-        string url = rootUrl + $"/Statistics/playerConfidence/{sessionId}/{year}";
+        string url = rootUrl + $"Statistics/playerConfidence/{sessionId}/{year}";
         UnityWebRequest request = UnityWebRequest.Get(url);
         yield return request.SendWebRequest();
         Debug.Log("Received response: " + request.downloadHandler.text);
@@ -215,7 +225,7 @@ public class ApiConnection : MonoBehaviour
     */
     public IEnumerator GetLeaderboard(int page, int pagesize, string type, System.Action<LeaderboardDTO> onSuccess)
     {
-        string url = rootUrl + "/Statistics";
+        string url = rootUrl + "Statistics";
         switch (type) { 
             
             case "amount":

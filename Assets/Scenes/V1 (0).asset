@@ -16,31 +16,31 @@ MonoBehaviour:
   displayName: 
   backgrounds:
   - id: background_0_A
-    sprite: {fileID: 8166620437743523110, guid: 961eeb7f6fab78b40b2cf9c62790d55a, type: 3}
+    sprite: {fileID: -8727664244658884236, guid: 5ac1eb3638e28e44e94880e89350d99f, type: 3}
   defaultBackgroundIndex: 0
   arrows:
   - position: {x: 2, y: -1}
     rotationDegrees: 60
     sceneToCall: 1
     scale: 0.6
-  - position: {x: -7.8, y: -3.1}
-    rotationDegrees: 200
-    sceneToCall: 1
+  - position: {x: -7.8, y: -4}
+    rotationDegrees: 210
+    sceneToCall: 23
     scale: 1
   - position: {x: 7.8, y: -4}
-    rotationDegrees: 310
+    rotationDegrees: 330
     sceneToCall: 13
     scale: 1
   doors:
   - id: door_0_A
-    position: {x: -6.24, y: -0.74}
+    position: {x: -6.24, y: -0.77}
     scale: {x: 1.3, y: 1.5}
     startsOpen: 0
     nextSceneId: 4
     arrowRotation: 90
     arrowScale: 0.5
   - id: door_0_B
-    position: {x: 5.585, y: -1.6}
+    position: {x: 5.585, y: -1.55}
     scale: {x: 1.3, y: 1.5}
     startsOpen: 0
     nextSceneId: 5

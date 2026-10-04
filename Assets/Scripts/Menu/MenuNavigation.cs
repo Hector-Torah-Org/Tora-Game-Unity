@@ -24,11 +24,18 @@ public class MenuNavigation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject != null) { 
+        if (EventSystem.current.currentSelectedGameObject != null)
+        {
             return;
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
+            if (ChestUI.Instance != null && ChestUI.Instance.IsOpen)            // sorry hab in deinen code eingegriffen. davor hat sich immer das men� ge�ffnet wenn man eine chest schlie�en wollte
+            {
+                ChestUI.Instance.Close();
+                return;
+            }
+
             GoBack();
         }
     }

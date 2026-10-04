@@ -39,6 +39,9 @@ public class ArrowSpawnData
 public class ChestSpawnData
 {
     public string id;
+
+    public ChestScript prefab;
+
     public Vector2 position;
     public Vector2 scale;
     public bool startsOpen;

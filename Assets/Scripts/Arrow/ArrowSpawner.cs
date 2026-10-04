@@ -6,6 +6,7 @@ public class ArrowSpawner : MonoBehaviour
 
     public ArrowScript createArrow(float x, float y, float d, int s, float scale = 1f)
     {
+        scale = scale * 0.2f;
         ArrowScript arrow = Instantiate(arrowPrefab);
 
         arrow.Init(new Vector2(x, y), d, s);                                            // Das wird gecalled, um einen Arrow zu spawnen

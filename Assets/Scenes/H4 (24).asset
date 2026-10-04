@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba5dfad84f813d44864e49ba61e3e2c, type: 3}
+  m_Name: H4 (24)
+  m_EditorClassIdentifier: 
+  sceneId: 24
+  displayName: 
+  backgrounds:
+  - id: background_24_A
+    sprite: {fileID: -5325683493038037280, guid: 070db9a9017ba5848bd4b148fa248013, type: 3}
+  defaultBackgroundIndex: 0
+  arrows:
+  - position: {x: 5, y: 0}
+    rotationDegrees: 0
+    sceneToCall: 23
+    scale: 1
+  doors: []
+  chests: []
+  interactables:
+  - id: sword_trigger
+    prefab: {fileID: 5780172284917241810, guid: 2da9ea0efe76f4446adba140eaa09f01, type: 3}
+    position: {x: -1.5, y: -1}
+    scale: {x: 0.1, y: 0.1}
+    startsUsed: 0
+    rewardItem: {fileID: 11400000, guid: c9f3d26ec23d84740902e6cb4059f347, type: 2}
+    rewardAmount: 1

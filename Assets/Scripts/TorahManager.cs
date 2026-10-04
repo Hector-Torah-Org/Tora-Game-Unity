@@ -98,7 +98,7 @@ public class TorahManager : MonoBehaviour
         currentOnLose = onLose;
 
         roundRunning = true;
-        SceneManager.Instance?.SetUIBlockingWorldInput(true);
+        SceneManager.Instance?.AddUIBlockingWorldInput(SceneManager.UIBlockLevel.ToraGame);
         localClassifications.Clear();
         currentImages.Clear();
         currentImageIndex = 0;
@@ -116,13 +116,8 @@ public class TorahManager : MonoBehaviour
     public IEnumerator StartTutorialRound(Action<tutorialRoundAnswerDTO> onResult)
     {
         isTutorialRound = true;
-        StartRound(() => { }, () => { StartCoroutine(StartTutorialRound(onResult)); });
-
-        yield return new WaitUntil(() => !roundRunning);
-
-        Debug.Log($"Tutorial round result: {tutorialRoundResult.correctAnswerRate} {tutorialRoundResult.passedTutorial}");
-
-        onResult?.Invoke(tutorialRoundResult);
+        StartRound(() => { Debug.Log($"Tutorial round result: {tutorialRoundResult.correctAnswerRate} {tutorialRoundResult.passedTutorial}"); onResult.Invoke(tutorialRoundResult); }, () => { StartCoroutine(StartTutorialRound(onResult)); });
+        yield return new WaitForSeconds(0.1f);
     }
 
     private IEnumerator BeginRoundCoroutine()
@@ -301,7 +296,8 @@ public class TorahManager : MonoBehaviour
         roundRunning = false;
 
         HideOverlay();
-        SceneManager.Instance?.SetUIBlockingWorldInput(false);
+        if (SceneManager.Instance.uiLevelsBlockingWorldInput.Contains(SceneManager.UIBlockLevel.ToraGame))
+            SceneManager.Instance?.RemoveUIBlockingWorldInput(SceneManager.UIBlockLevel.ToraGame);
         currentOnWin?.Invoke();
     }
 
@@ -313,7 +309,8 @@ public class TorahManager : MonoBehaviour
         roundRunning = false;
 
         HideOverlay();
-        SceneManager.Instance?.SetUIBlockingWorldInput(false);
+        if (SceneManager.Instance.uiLevelsBlockingWorldInput.Contains(SceneManager.UIBlockLevel.ToraGame))
+            SceneManager.Instance?.RemoveUIBlockingWorldInput(SceneManager.UIBlockLevel.ToraGame);
         currentOnLose?.Invoke();
     }
 

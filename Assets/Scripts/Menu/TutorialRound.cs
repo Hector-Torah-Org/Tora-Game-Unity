@@ -7,19 +7,23 @@ public class TutorialRound : MonoBehaviour
 
     public void StartTutorialRound(string message = "")
     {
+        SceneManager.Instance.AddUIBlockingWorldInput(SceneManager.UIBlockLevel.ForcedTutorial);
         annotationsguideline.StartRound(() =>
         {
             Debug.Log("StartingTutorialTest");
             this.gameObject.SetActive(true);
             StartCoroutine(TorahManager.Instance.StartTutorialRound((result) =>
             {
+                Debug.Log("Received tutorialAnswerDTO");
                 if (!result.passedTutorial)
                 {
-                    StartTutorialRound($"You only had an accuracy of {Math.Round(result.correctAnswerRate * 100)}%, which isn't enough to move on. Please read the guideline carefully to ensure your annotations are correct. Good luck on your next try.");
+                    Debug.Log("Restarting Tutorial");
+                    StartTutorialRound($"Da du nur eine Genauigkeit von {Math.Round(result.correctAnswerRate * 100)}% erreicht hast, kannst du noch nicht mit dem Spiel beginnen. Bitte lies dir den Annotationsleitfaden erneut genau durch, um falsche Annotationen zu vermeiden. Viel Erfolg beim nächsten Versuch.");
                 }
                 else
                 {
                     this.gameObject.SetActive(false);
+                    SceneManager.Instance.RemoveUIBlockingWorldInput(SceneManager.UIBlockLevel.ForcedTutorial);
                 }
             }));
         }, message);

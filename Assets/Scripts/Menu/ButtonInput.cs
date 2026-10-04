@@ -17,6 +17,11 @@ public class ButtonInput : MonoBehaviour
 
     public TutorialRound tutorialRound;
 
+    private void Start()
+    {
+        SceneManager.Instance.AddUIBlockingWorldInput(SceneManager.UIBlockLevel.LoginInterface);
+    }
+
     public void LoginClicked()
     {
         string firstName = firstNameInput.text;
@@ -27,6 +32,7 @@ public class ButtonInput : MonoBehaviour
         StartCoroutine(apiConnection.SessionLogin(firstName, lastName, userName, success => 
                                     { 
                                         panel.SetActive(false);
+                                        SceneManager.Instance.RemoveUIBlockingWorldInput(SceneManager.UIBlockLevel.LoginInterface);
 
                                         if (!success.hasPassedTutorial)
                                         {
@@ -53,6 +59,7 @@ public class ButtonInput : MonoBehaviour
                         {
 
                             panel.SetActive(false); Debug.Log("Login successful");
+                            SceneManager.Instance.RemoveUIBlockingWorldInput(SceneManager.UIBlockLevel.LoginInterface);
 
                             if (!success.hasPassedTutorial)
                             {

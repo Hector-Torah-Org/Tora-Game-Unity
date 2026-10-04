@@ -62,7 +62,7 @@ public class InterScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (SceneManager.Instance != null && SceneManager.Instance.IsUIBlockingWorldInput)
+        if (SceneManager.Instance != null && SceneManager.Instance.uiLevelsBlockingWorldInput.Count > 0)
             return;
 
         if (isUsed)

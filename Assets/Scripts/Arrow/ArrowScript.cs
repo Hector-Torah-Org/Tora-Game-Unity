@@ -46,8 +46,10 @@ public class ArrowScript : MonoBehaviour
     private void OnMouseDown()
     {
         if (SceneManager.Instance != null &&
-        SceneManager.Instance.IsUIBlockingWorldInput)
+        SceneManager.Instance.uiLevelsBlockingWorldInput.Count > 0)
+        {
             return;
+        }
 
         if (SceneTransition.Instance != null)
         {

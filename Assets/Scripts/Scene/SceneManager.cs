@@ -30,7 +30,21 @@ public class SceneManager : MonoBehaviour
     private int currentSceneId = -1;
     public int CurrentSceneId => currentSceneId;
 
-    public bool IsUIBlockingWorldInput { get; set; }
+    public List<UIBlockLevel> uiLevelsBlockingWorldInput { get; set; } = new List<UIBlockLevel>();
+
+    /// <summary>
+    /// Any level stops interactions with the world, UI elements with a higher level stop all lower levels, UI elements from a lower might level still allow higher levels to be opened
+    /// </summary>
+    public enum UIBlockLevel
+    {
+        ChestInventory,
+        Inventory,
+        ToraGame,
+        SceneTransition,
+        Menu,
+        ForcedTutorial,
+        LoginInterface
+    }
 
     private void Awake()
     {
@@ -473,9 +487,14 @@ public class SceneManager : MonoBehaviour
         return arrowSpawner.createArrow(p.x, p.y, rotationDeg, nextSceneId, scale);
     }
 
-    public void SetUIBlockingWorldInput(bool block)
+    public void AddUIBlockingWorldInput(UIBlockLevel blockLevel)
     {
-        IsUIBlockingWorldInput = block;
+        uiLevelsBlockingWorldInput.Add(blockLevel);
+    }
+
+    public void RemoveUIBlockingWorldInput(UIBlockLevel blockLevel)
+    {
+        uiLevelsBlockingWorldInput.RemoveAll(block => block == blockLevel);
     }
 
     public bool GetInteractableIsUsed(string interactableId, bool fallback)

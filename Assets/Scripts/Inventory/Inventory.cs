@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -37,22 +38,32 @@ public class Inventory : MonoBehaviour
 
     public void Open()
     {
+        if(SceneManager.Instance != null && SceneManager.Instance.uiLevelsBlockingWorldInput.Count > 0 && SceneManager.Instance.uiLevelsBlockingWorldInput[^1] > SceneManager.UIBlockLevel.Inventory)
+        {
+            return;
+        }
+
         isOpen = true;
         if (inventoryPanel != null) inventoryPanel.gameObject.SetActive(true);
         RefreshUI();
 
         if (SceneManager.Instance != null)
-            SceneManager.Instance.SetUIBlockingWorldInput(true);
+            SceneManager.Instance.AddUIBlockingWorldInput(SceneManager.UIBlockLevel.Inventory);
     }
 
     public void Close()
     {
+        if (SceneManager.Instance != null && SceneManager.Instance.uiLevelsBlockingWorldInput.Count > 0 && SceneManager.Instance.uiLevelsBlockingWorldInput[^1] > SceneManager.UIBlockLevel.Inventory)
+        {
+            return;
+        }
+
         isOpen = false;
         if (inventoryPanel != null) inventoryPanel.gameObject.SetActive(false);
         ClearUI();
 
         if (SceneManager.Instance != null)
-            SceneManager.Instance.SetUIBlockingWorldInput(false);
+            SceneManager.Instance.RemoveUIBlockingWorldInput(SceneManager.UIBlockLevel.Inventory);
     }
 
     public void RefreshUI()

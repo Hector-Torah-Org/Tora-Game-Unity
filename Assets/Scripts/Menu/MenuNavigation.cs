@@ -24,13 +24,9 @@ public class MenuNavigation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject != null)
+        if (Input.GetKeyDown(KeyCode.M) && (sceneManager.uiLevelsBlockingWorldInput.Count == 0 || sceneManager.uiLevelsBlockingWorldInput[^1] <= SceneManager.UIBlockLevel.Menu))
         {
-            return;
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            if (ChestUI.Instance != null && ChestUI.Instance.IsOpen)            // sorry hab in deinen code eingegriffen. davor hat sich immer das men� ge�ffnet wenn man eine chest schlie�en wollte
+            if (ChestUI.Instance != null && ChestUI.Instance.IsOpen)
             {
                 ChestUI.Instance.Close();
                 return;
@@ -45,13 +41,13 @@ public class MenuNavigation : MonoBehaviour
         if (history.Count() > 0)
         {
             history.Last().SetActive(false);
-            if (history.Count() > 1) history[history.Count() - 2].SetActive(true); else sceneManager.IsUIBlockingWorldInput = false;
+            if (history.Count() > 1) history[history.Count() - 2].SetActive(true); else sceneManager.RemoveUIBlockingWorldInput(SceneManager.UIBlockLevel.Menu);
             history.RemoveAt(history.Count() - 1);
         } else
         {
             MainMenu.SetActive(true);
             history.Add(MainMenu);
-            sceneManager.IsUIBlockingWorldInput = true;
+            sceneManager.AddUIBlockingWorldInput(SceneManager.UIBlockLevel.Menu);
         }
     }
 
@@ -59,7 +55,7 @@ public class MenuNavigation : MonoBehaviour
     {
         history.Last().SetActive(false);
         history.Add(submenu);
-        sceneManager.IsUIBlockingWorldInput = true;
+        sceneManager.AddUIBlockingWorldInput(SceneManager.UIBlockLevel.Menu);
         history.Last().SetActive(true);
     }
 

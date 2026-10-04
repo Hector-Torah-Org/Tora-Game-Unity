@@ -36,6 +36,7 @@ public class Annotationsguideline : MonoBehaviour
         }
         Debug.Log("Starting Tutorial");
         this.gameObject.transform.parent.gameObject.SetActive(true);
+        this.gameObject.SetActive(true);
         this.actionAfterCompletion = actionAfterCompletion;
     }
 
@@ -58,12 +59,12 @@ public class Annotationsguideline : MonoBehaviour
     {
          switch (pageNumber)
         {
-            case 0: //only gets triggered by StartRound if a message is passed
+            case 0: //only gets triggered by StartRound if a message is passed, which happens only in the tutorial after a failed attempt
                 example1.gameObject.SetActive(false);
                 example2.gameObject.SetActive(false);
                 result1.gameObject.SetActive(false);
                 result2.gameObject.SetActive(false);
-                header.text = "Next Try";
+                header.text = "Nächster Versuch";
                 description.text = this.message;
                 break;
 
@@ -73,7 +74,7 @@ public class Annotationsguideline : MonoBehaviour
                 result1.gameObject.SetActive(false);
                 result2.gameObject.SetActive(false);
                 header.text = "Einleitung";
-                description.text = "Buchstaben in Torahrollen enthalten oftmals Dekorationen, beispielsweise in Form von Kringeln und Krönchen. Diese Dekorationen werden Tagin genannt. Ziel des Annotationsprojektes ist die Erarbeitung eines größeren Datensatzes mit annotierten Buchstaben auf Grundlage der dekorativen Elemente. Der Annotationsprozess soll im Rahmen eines Citizen-Science Projekts stattfinden. Hierbei handelt es sich um einen Crowdsourcing-Ansatz bei dem interessierte Personen am Annotationsprozess teilnehmen können und somit wissenschaftliche Arbeit befördern. Im Folgenden Guideline findet sich eine Beschreibung der relevanten Annotationseinheiten und -kategorien. Weiterhin werden problematische Fälle zur Illustration der Eigenheiten des Datensatzes bezüglich der zu annotierenden Einheiten vorgestellt.";
+                description.text = "Buchstaben in Torarollen enthalten oftmals Dekorationen, beispielsweise in Form von Kringeln und Krönchen. Diese Dekorationen werden Tagin genannt. Ziel des Annotationsprojektes ist die Erarbeitung eines größeren Datensatzes mit annotierten Buchstaben auf Grundlage der dekorativen Elemente. Der Annotationsprozess soll im Rahmen eines Citizen-Science-Projekts stattfinden. Hierbei handelt es sich um einen Crowdsourcing-Ansatz, bei dem interessierte Personen am Annotationsprozess teilnehmen können und somit zur wissenschaftlichen Forschung beitragen. Im folgenden Leitfaden findet sich eine Beschreibung der relevanten Annotationseinheiten und -kategorien. Weiterhin werden problematische Fälle zur Illustration der Eigenheiten des Datensatzes bezüglich der zu annotierenden Einheiten vorgestellt.";
                 break;
 
             case 2:
@@ -82,7 +83,7 @@ public class Annotationsguideline : MonoBehaviour
                 result1.gameObject.SetActive(false);
                 result2.gameObject.SetActive(false);
                 header.text = "Annotationseinheiten";
-                description.text = "Das Annotationsprojekt befasst sich auf Ebene der Annotationseinheiten mit Buchstaben. Diese können dekorative Elemente enthalten. Die Buchstaben sind klar voneinander abgegrenzt. Es handelt sich, wie bei Torarollen vorgegeben, um hebräische Buchstaben. Die Buchstaben zeigen sich in handgeschriebener Ausführung.";
+                description.text = "Das Annotationsprojekt befasst sich auf der Ebene der Annotationseinheiten mit Buchstaben. Diese können dekorative Elemente enthalten. Die Buchstaben sind klar voneinander abgegrenzt. Wie bei Torarollen vorgegeben, handelt es sich um hebräische Buchstaben. Die Buchstaben liegen in handgeschriebener Form vor.\r\n";
                 break;
 
             case 3:
@@ -91,9 +92,9 @@ public class Annotationsguideline : MonoBehaviour
                 result1.gameObject.SetActive(false);
                 result2.gameObject.SetActive(false);
                 header.text = "Annotationskategorien";
-                description.text = "Der Fokus des Annotationsprojekts liegt auf der Frage nach der Verteilung und dem Einsatz von Buchstabendekorationen in primär historischen Torarollen. Dementsprechend sind die zentralen Kategorien dekoriert und undekoriert. Bei ersterer Kategorie handelt es sich um eine Akkumulation mehrere Phänomene. Beispielsweise gibt es sowohl kringelartige wie auch kronenartige dekorative Elemente, die den Buchstaben hinzugefügt wurden. Da der Fokus auf einer allgemeinen Nutzung und Verteilung von Dekorationen liegt, wird im ersten hier beschriebenen Schritt nur zwischen den beiden Kategorie dekoriert und undekoriert unterschieden.";
+                description.text = "Der Fokus des Annotationsprojekts liegt auf der Frage nach der Verteilung und dem Einsatz von Buchstabendekorationen in primär historischen Torarollen. Dementsprechend sind die zentralen Kategorien „dekoriert“ und „undekoriert“. Bei der ersten Kategorie handelt es sich um eine Zusammenfassung mehrerer Phänomene. Beispielsweise gibt es sowohl kringelartige als auch kronenartige dekorative Elemente, die den Buchstaben hinzugefügt wurden. Da der Fokus auf der allgemeinen Nutzung und Verteilung von Dekorationen liegt, wird im ersten hier beschriebenen Schritt nur zwischen den beiden Kategorien „dekoriert“ und „undekoriert“ unterschieden.\r\n";
                 break;
-
+               
             case 4:
                 example1.gameObject.SetActive(false);
                 example2.gameObject.SetActive(false);
@@ -102,7 +103,7 @@ public class Annotationsguideline : MonoBehaviour
                 header.text = "Annotationskategorien";
                 description.text = "Dementsprechend sind folgende Kategorien gegeben:\n" +
                                     "• Dekoriert: Die Annotationseinheit weist über die Struktur des eigentlichen Buchstabens hinaus weitere Elemente dekorativer Natur auf.\n" +
-                                    "• Undekoriert: Die Annotationseinheit weist über die Struktur des eigentlichen Buchstabens hinaus keine weiteren Elemente dekorativer Natur auf; besteht also nur aus der Form des entsprechenden hebräischen Buchstabens.";
+                                    "• Undekoriert: Die Annotationseinheit weist über die Struktur des eigentlichen Buchstabens hinaus keine weiteren Elemente dekorativer Natur auf; sie besteht also nur aus der Form des entsprechenden hebräischen Buchstabens.";
                 break;
 
             case 5:
@@ -111,7 +112,7 @@ public class Annotationsguideline : MonoBehaviour
                 result1.gameObject.SetActive(false);
                 result2.gameObject.SetActive(false);
                 header.text = "Problematische Fälle";
-                description.text = "Aufgrund des handschriftlichen Natur des Datensatzes, variierender Digitalisierungsmethoden sowie Fehler bei der automatischen Buchstabenerkennung treten Herausforderungen auf. Diese sind in vier Kategorien zu unterteilen.";
+                description.text = "Aufgrund der handschriftlichen Natur des Datensatzes, variierender Digitalisierungsmethoden sowie von Fehlern bei der automatischen Buchstabenerkennung treten Herausforderungen auf. Diese sind in vier Kategorien zu unterteilen.";
                 break;
 
             case 6:
@@ -126,7 +127,7 @@ public class Annotationsguideline : MonoBehaviour
                 example1.sprite = null;
                 example2.sprite = null;
                 header.text = "Problematische Fälle";
-                description.text = "1. Schlechte Bildqualität: Durch den Digitalisierungs- und Weiterverarbeitungsprozess liegen einige Scans der Torarollen nur in geringer Qualität gemessen an der Auflösung vor. Dementsprechend sehen sich Annotator*innen mit Ambiguitäten aufgrund von verpixelter oder verschommener Buchstaben konfrontiert. Es können aufgrund der niedrigen Bildqualität Artefakte auftreten, die missinterpretiert werden können und somit fälschlicherweise als Dekoration annotiert werden.";
+                description.text = "1. Schlechte Bildqualität: Durch den Digitalisierungs- und Weiterverarbeitungsprozess liegen einige Scans der Torarollen nur in geringer Qualität gemessen an der Auflösung vor. Dementsprechend sehen sich Annotator*innen mit Unklarheiten aufgrund von verpixelten oder verschwommenen Buchstaben konfrontiert. Es können aufgrund der niedrigen Bildqualität Artefakte auftreten, die missinterpretiert werden können und somit fälschlicherweise als Dekoration annotiert werden können.";
                 break;
 
             case 7:
@@ -141,7 +142,7 @@ public class Annotationsguideline : MonoBehaviour
                 example1.sprite = null;
                 example2.sprite = null;
                 header.text = "Problematische Fälle";
-                description.text = "2. Handschriftliche Natur und undeutliche Dekorationen: Die handschriftliche Natur der Buchstaben stellt Annotator*innen vor weitere Herausforderungen. Die Identifizierung der Dekorationen gestaltet sich gerade bei sehr dünnen oder sehr dicken Buchstabenteilen als kompliziert. Weiterhin kann die verwendete Schriftart der Gruppe der Serifenschreiften zugeordnet werden. Die entsprechenden Serife innerhalb des Annotationen können leicht mit dekorativen Elementen verwechselt werden.";
+                description.text = "2. Handschriftliche Natur und undeutliche Dekorationen: Die handschriftliche Natur der Buchstaben stellt Annotator*innen vor weitere Herausforderungen. Die Identifizierung der Dekorationen gestaltet sich gerade bei sehr dünnen oder sehr dicken Buchstabenteilen als kompliziert. Weiterhin kann die verwendete Schriftart der Gruppe der Serifenschriften zugeordnet werden. Die entsprechenden Serifen innerhalb der Buchstaben können leicht mit dekorativen Elementen verwechselt werden.";
                 break;
 
             case 8:
@@ -167,22 +168,35 @@ public class Annotationsguideline : MonoBehaviour
                 example1.sprite = null;
                 example2.sprite = null;
                 header.text = "Problematische Fälle";
-                description.text = "4. Datensatzfehler: In seltenen Fällen sind die zu annotierenden Buchstaben nicht im Bildausschnitt sichtbar. Dies entsteht durch den automatisierten Buchstabenerkennungsprozess. Es treten beispielsweise Fälle auf, in denen nur Fragmente mehrerer Buchstaben gezeigt werden.";
+                description.text = "4. Datensatzfehler: In seltenen Fällen sind die zu annotierenden Buchstaben nicht im Bildausschnitt sichtbar. Dies kann durch den automatisierten Buchstabenerkennungsprozess entstehen. Es treten beispielsweise Fälle auf, in denen nur Fragmente mehrerer Buchstaben gezeigt werden.";
                 break;
 
             case 10:
-                if (actionAfterCompletion != null)
+                if (actionAfterCompletion != null) // Happens when activated by a forced Tutorial
                 {
-                    this.gameObject.transform.parent.gameObject.SetActive(false);
-                    actionAfterCompletion.Invoke();
-                    actionAfterCompletion = null;
+                    example1.gameObject.SetActive(false);
+                    example2.gameObject.SetActive(false);
+                    result1.gameObject.SetActive(false);
+                    result2.gameObject.SetActive(false);
+                    header.text = "";
+                    description.text = "Bevor es mit dem Spiel losgeht, gibt es jetzt noch ein kleinen Test";
                 }
                 else
                 {
                     menuNavigation.GoBack();
+                    currentPage = 1;
+                    BuildPage(currentPage);
                 }
-                currentPage = 1;
                 break;
+
+            case 11:    
+                actionAfterCompletion.Invoke();
+                this.gameObject.transform.parent.gameObject.SetActive(false);
+                actionAfterCompletion = null;
+                currentPage = 1;
+                BuildPage(currentPage);
+                break;
+
 
         }
     }
@@ -195,14 +209,14 @@ public class Annotationsguideline : MonoBehaviour
 
             if (request.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError("TorahManager: Failed to load image: " + request.error);
+                Debug.LogError("Annotationsguideline: Failed to load image: " + request.error);
                 yield break;
             }
 
             Texture2D texture = DownloadHandlerTexture.GetContent(request);
             if (texture == null)
             {
-                Debug.LogError("TorahManager: Downloaded texture is null.");
+                Debug.LogError("Annotationsguideline: Downloaded texture is null.");
                 yield break;
             }
 

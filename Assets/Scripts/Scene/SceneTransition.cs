@@ -58,7 +58,7 @@ public class SceneTransition : MonoBehaviour
         isTransitioning = true;
 
         if (SceneManager.Instance != null)
-            SceneManager.Instance.IsUIBlockingWorldInput = true;
+            SceneManager.Instance.AddUIBlockingWorldInput(SceneManager.UIBlockLevel.SceneTransition);
   
         yield return Fade(0f, 1f, fadeToBlackDuration);
 
@@ -77,7 +77,7 @@ public class SceneTransition : MonoBehaviour
         yield return Fade(1f, 0f, fadeFromBlackDuration);
 
         if (SceneManager.Instance != null)
-            SceneManager.Instance.IsUIBlockingWorldInput = false;
+            SceneManager.Instance.RemoveUIBlockingWorldInput(SceneManager.UIBlockLevel.SceneTransition);
 
         isTransitioning = false;
     }
@@ -95,7 +95,7 @@ public class SceneTransition : MonoBehaviour
         isTransitioning = true;
 
         if (SceneManager.Instance != null)
-            SceneManager.Instance.IsUIBlockingWorldInput = true;
+            SceneManager.Instance.AddUIBlockingWorldInput(SceneManager.UIBlockLevel.SceneTransition);
 
    
         originalCameraPosition = mainCamera.transform.position;
@@ -179,7 +179,7 @@ public class SceneTransition : MonoBehaviour
         yield return Fade(1f, 0f, fadeFromBlackDuration);
 
         if (SceneManager.Instance != null)
-            SceneManager.Instance.IsUIBlockingWorldInput = false;
+            SceneManager.Instance.RemoveUIBlockingWorldInput(SceneManager.UIBlockLevel.SceneTransition);
 
         isTransitioning = false;
     }

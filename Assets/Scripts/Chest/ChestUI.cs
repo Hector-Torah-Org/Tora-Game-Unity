@@ -34,7 +34,7 @@ public class ChestUI : MonoBehaviour
 
         if (chestPanel != null) { chestPanel.gameObject.SetActive(true); }
 
-        SceneManager.Instance?.SetUIBlockingWorldInput(true);
+        SceneManager.Instance?.AddUIBlockingWorldInput(SceneManager.UIBlockLevel.ChestInventory);
 
         Render(contents);
     }
@@ -45,7 +45,7 @@ public class ChestUI : MonoBehaviour
         ClearUI();
         if (chestPanel != null) { chestPanel.gameObject.SetActive(false); }
 
-        SceneManager.Instance?.SetUIBlockingWorldInput(false);
+        SceneManager.Instance?.RemoveUIBlockingWorldInput(SceneManager.UIBlockLevel.ChestInventory);
     }
 
     private void Render(List<ItemStack> contents)

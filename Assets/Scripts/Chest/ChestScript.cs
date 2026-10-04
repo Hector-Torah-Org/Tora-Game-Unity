@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,11 +38,11 @@ public class ChestScript : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (SceneManager.Instance != null && SceneManager.Instance.IsUIBlockingWorldInput)
-            return;
-
         if (!isOpen)
         {
+            if (SceneManager.Instance != null && SceneManager.Instance.uiLevelsBlockingWorldInput.Count > 0)
+                return;
+
             if (TorahManager.Instance == null)
             {
                 Debug.LogWarning("TorahManager.Instance is null");
@@ -61,6 +62,9 @@ public class ChestScript : MonoBehaviour
         }
 
         
+        if (SceneManager.Instance != null && SceneManager.Instance.uiLevelsBlockingWorldInput.Count > 0 && SceneManager.Instance.uiLevelsBlockingWorldInput[^1] > SceneManager.UIBlockLevel.Inventory)
+            return;
+
         if (ChestUI.Instance != null)
         {
             ChestUI.Instance.Open(this, contents);

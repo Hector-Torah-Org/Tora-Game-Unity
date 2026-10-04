@@ -3746,7 +3746,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   annotationsguideline: {fileID: 1436986354}
-  torahManager: {fileID: 1162404127}
 --- !u!1 &773759993
 GameObject:
   m_ObjectHideFlags: 0
@@ -7944,7 +7943,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &1310327897
 RectTransform:
@@ -10171,6 +10170,9 @@ MonoBehaviour:
   tog: {fileID: 11400000, guid: 95829dd8c4f3f19499373328ae32510f, type: 2}
   tod: {fileID: 11400000, guid: e1665c8661d33944b80d05255967282f, type: 2}
   tol: {fileID: 11400000, guid: 09384c4c5104f2c40ae3ade7da31371b, type: 2}
+  stone_tablet: {fileID: 0}
+  scroll: {fileID: 0}
+  letter: {fileID: 0}
   apiConnection: {fileID: 810143033}
 --- !u!4 &1817204535
 Transform:

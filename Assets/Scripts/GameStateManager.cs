@@ -200,8 +200,8 @@ public class GameStateManager : MonoBehaviour
             sceneR2GameState,
             sceneGRD1GameState,
             sceneGRD2GameState,
-            sceneH5GameState,
-            sceneH6GameState,
+            sceneH5GameState,               // 00|1|11122|23
+            sceneH6GameState,               // 00|1|11122|23
             sceneH7GameState
         );
     }
@@ -221,6 +221,8 @@ public class GameStateManager : MonoBehaviour
             Debug.LogError("Received gameState: " + gameState);
             return;
         }
+
+                                                                        // IF YOU ADD MORE SCENES, DON'T FORGET TO ADD MORE SPLITS IF "parts.Length" is smaller than expected parts.Length.
 
         inventoryGameState = parts[0];
         sceneV1GameState = parts[1];
@@ -272,6 +274,45 @@ public class GameStateManager : MonoBehaviour
     public void CreateSaveStrings()
     {
         Debug.Log("CreateSaveStrings active");
+
+        List<string> inventoryIds = new List<string>();
+
+        foreach (ItemStack stack in inventory.Items)
+        {
+            if (stack == null || stack.item == null)
+                continue;
+
+            string id = "";
+
+            if (stack.item == coin) id = "0";
+            else if (stack.item == unlockObject1) id = "1";
+            else if (stack.item == axe) id = "2";
+            else if (stack.item == bucket) id = "3";
+            else if (stack.item == lever) id = "4";
+            else if (stack.item == key) id = "5";
+            else if (stack.item == sword) id = "6";
+            else if (stack.item == cursed_coin) id = "7";
+            else if (stack.item == rope) id = "8";
+            else if (stack.item == bridge_restorer) id = "9";
+            else if (stack.item == crowbar) id = "10";
+            else if (stack.item == tog) id = "11";
+            else if (stack.item == tod) id = "12";
+            else if (stack.item == tol) id = "13";
+            else if (stack.item == stone_tablet) id = "14";
+            else if (stack.item == scroll) id = "15";
+            else if (stack.item == letter) id = "16";
+
+            if (id == "")
+                continue;
+
+            for (int i = 0; i < stack.amount; i++)
+            {
+                inventoryIds.Add(id);
+            }
+        }
+
+        inventoryGameState = string.Join(",", inventoryIds);
+
 
         sceneV1GameState = "" + DoorState("door_0_A") + DoorState("door_0_B") + ChestState("chest_0_A", coin) + ChestState("chest_0_B", coin) + InteractableState("well_trigger1");
         sceneP1GameState = "" + DoorState("door_1_A") + ChestState("chest_1_A", coin);

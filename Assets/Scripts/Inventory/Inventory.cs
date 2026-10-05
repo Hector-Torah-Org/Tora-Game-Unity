@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private ItemView itemViewPrefab;
 
     private readonly List<ItemStack> items = new List<ItemStack>();
+    public IReadOnlyList<ItemStack> Items => items;
     private bool isOpen = false;
                                                             
     public void AddItem(ItemStack stack)

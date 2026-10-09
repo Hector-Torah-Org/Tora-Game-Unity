@@ -8,8 +8,8 @@ public class LeaderboardElement : MonoBehaviour
 
     public void SetData(string username, string score, int rank)
     {
-        UsernameText.text = username;
-        ScoreText.text = score;
-        RankText.text = rank.ToString();
+        I18nText.SetLiteralText(UsernameText, username);
+        I18nText.SetLiteralText(ScoreText, score);
+        I18nText.SetLiteralText(RankText, rank.ToString(I18n.CurrentCulture));
     }
 }

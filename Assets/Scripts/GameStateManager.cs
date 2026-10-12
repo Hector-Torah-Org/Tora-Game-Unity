@@ -529,6 +529,27 @@ public class GameStateManager : MonoBehaviour
                         amount = 1
                     });
                     break;
+                case "14":
+                    inventory.AddItem(new ItemStack
+                    {
+                        item = stone_tablet,
+                        amount = 1
+                    });
+                    break;
+                case "15":
+                    inventory.AddItem(new ItemStack
+                    {
+                        item = scroll,
+                        amount = 1
+                    });
+                    break;
+                case "16":
+                    inventory.AddItem(new ItemStack
+                    {
+                        item = letter,
+                        amount = 1
+                    });
+                    break;
             }
         }
 

@@ -15,6 +15,7 @@ Save =Save
 Choose a classification=Choose a classification
 Leaderboards\n\n=Leaderboards\n\n
 Objectives/Story go in here=Objectives/Story go in here
+# Never translate the item names, as they are used in code and must match the item asset names exactly.
 item.1.name=Coin
 item.2.name=Unlock item 1
 item.3.name=Axe
@@ -33,6 +34,7 @@ item.15.name=TOL
 item.16.name=Stone Tablet
 item.17.name=Scroll
 item.18.name=Letter
+# End of item names
 item.16.readable.title=Stone Tablet - Church
 item.17.readable.title=Scroll - Village
 item.18.readable.title=Letter - Village

@@ -50,7 +50,7 @@ public class Annotationsguideline : MonoBehaviour
 
     public void LastPage()
     {
-        if (currentPage > 1)
+        if (currentPage > 1 && currentPage < 12)
         {
             currentPage--;
             BuildPage(currentPage);
@@ -172,6 +172,15 @@ public class Annotationsguideline : MonoBehaviour
                 break;
 
             case 10:
+                example1.gameObject.SetActive(false);
+                example2.gameObject.SetActive(false);
+                result1.gameObject.SetActive(false);
+                result2.gameObject.SetActive(false);
+                I18nText.SetText(header, "tutorial.controls.title");
+                I18nText.SetText(description, "tutorial.controls.body");
+                break;
+
+            case 11:
                 if (actionAfterCompletion != null) // Happens when activated by a forced Tutorial
                 {
                     example1.gameObject.SetActive(false);
@@ -189,7 +198,7 @@ public class Annotationsguideline : MonoBehaviour
                 }
                 break;
 
-            case 11:    
+            case 12:
                 actionAfterCompletion.Invoke();
                 this.gameObject.transform.parent.gameObject.SetActive(false);
                 actionAfterCompletion = null;

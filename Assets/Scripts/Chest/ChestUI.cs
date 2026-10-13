@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ChestUI : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ChestUI : MonoBehaviour
     [SerializeField] private Inventory playerInventory;
 
     private ChestScript currentChest;
+    private int openedAtFrame = -1;
 
 
     public bool IsOpen
@@ -27,10 +29,19 @@ public class ChestUI : MonoBehaviour
         Instance = this;
     }
 
+    private void Update()
+    {
+        if (!IsOpen || Time.frameCount == openedAtFrame)
+            return;
+
+        if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
+            Close();
+    }
 
     public void Open(ChestScript chest, List<ItemStack> contents)
     {
         currentChest = chest;
+        openedAtFrame = Time.frameCount;
 
         if (chestPanel != null) { chestPanel.gameObject.SetActive(true); }
 

@@ -213,6 +213,12 @@ public class GameStateManager : MonoBehaviour
             Debug.LogWarning("No gameState received. Using default strings.");
             return;
         }
+        gameState = gameState.Trim();
+        if (gameState.Length >= 2 && gameState[0] == '"' && gameState[gameState.Length - 1] == '"')
+        {
+            Debug.Log("Removing quotes from gameState string.");
+            gameState = gameState.Substring(1, gameState.Length - 2);
+        }
 
         string[] parts = gameState.Split('|');
         if (parts.Length < 43)

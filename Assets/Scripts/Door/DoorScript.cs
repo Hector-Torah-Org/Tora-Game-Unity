@@ -8,8 +8,14 @@ public class DoorScript : MonoBehaviour
     [SerializeField] private GameObject closedVisual;
     [SerializeField] private GameObject openVisual;
 
+    private Collider2D doorCollider;
     private ArrowScript doorArrow;
-                                                                    
+
+    private void Awake()
+    {
+        doorCollider = GetComponent<Collider2D>();
+    }
+
     public void Init(DoorSpawnData doorData, bool open)
     {
         data = doorData;
@@ -26,12 +32,13 @@ public class DoorScript : MonoBehaviour
 
         if (closedVisual != null) closedVisual.SetActive(!isOpen);
         if (openVisual != null) openVisual.SetActive(isOpen);
+        if (doorCollider != null) doorCollider.enabled = !isOpen;
 
         if (isOpen)
         {
             if (doorArrow == null && SceneManager.Instance != null)
             {
-                SceneManager.Instance.SpawnArrowOnDoor(transform, data.nextSceneId, data.arrowRotation, data.arrowScale);
+                doorArrow = SceneManager.Instance.SpawnArrowOnDoor(transform, data.nextSceneId, data.arrowRotation, data.arrowScale);
 
                 Debug.Log($"Door {data.id}: spawned arrow -> scene {data.nextSceneId}, rot {data.arrowRotation}");
             }

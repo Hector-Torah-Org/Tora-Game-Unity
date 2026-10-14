@@ -26,14 +26,14 @@ public class QuestUI : MonoBehaviour
             return;
         }
 
-        objectiveText.text = text;
+        I18nText.SetLiteralText(objectiveText, text);
     }
 
     public void ClearObjective()
     {
         if (objectiveText != null)
         {
-            objectiveText.text = "";
+            I18nText.SetLiteralText(objectiveText, "");
         }
     }
 }

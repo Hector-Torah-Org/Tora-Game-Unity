@@ -106,7 +106,7 @@ public class TorahManager : MonoBehaviour
         ShowOverlay();
         ClearImageDisplay();
         SetButtonsInteractable(false);
-        SetStatus("Loading images...");
+        SetStatus("round.loading_images");
         SetCounter("");
         SetCharacter("");
 
@@ -180,8 +180,8 @@ public class TorahManager : MonoBehaviour
         var currentImage = currentImages[currentImageIndex];
 
         SetButtonsInteractable(false);
-        SetStatus("Loading image...");
-        SetCounter($"Image {currentImageIndex + 1} / {currentImages.Count}");
+        SetStatus("round.loading_image");
+        I18nText.SetFormattedText(counterText, "round.image_counter", currentImageIndex + 1, currentImages.Count);
         SetCharacter(currentImage.character);
 
         yield return new WaitUntil(() => imageSprites[currentImageIndex] != null);
@@ -194,7 +194,7 @@ public class TorahManager : MonoBehaviour
             yield break;
         }    
 
-        SetStatus("Choose a classification");
+        SetStatus("round.choose_classification");
         SetButtonsInteractable(true);
     }
 
@@ -269,7 +269,7 @@ public class TorahManager : MonoBehaviour
 
     private IEnumerator FinishRoundCoroutine()
     {
-        SetStatus("Sending classifications...");
+        SetStatus("round.sending_classifications");
         SetButtonsInteractable(false);
         foreach(var classification in localClassifications)
         {
@@ -341,19 +341,19 @@ public class TorahManager : MonoBehaviour
     private void SetStatus(string message)
     {
         if (statusText != null)
-            statusText.text = message;
+            I18nText.SetText(statusText, message);
     }
 
     private void SetCounter(string message)
     {
         if (counterText != null)
-            counterText.text = message;
+            I18nText.SetLiteralText(counterText, message);
     }
 
     private void SetCharacter(string message)
     {
         if (characterText != null)
-            characterText.text = string.IsNullOrEmpty(message) ? "" : message;
+            I18nText.SetLiteralText(characterText, string.IsNullOrEmpty(message) ? "" : message);
     }
 
     private void ClearImageDisplay()

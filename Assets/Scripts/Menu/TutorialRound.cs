@@ -5,7 +5,7 @@ public class TutorialRound : MonoBehaviour
 {
     public Annotationsguideline annotationsguideline;
 
-    public void StartTutorialRound(string message = "")
+    public void StartTutorialRound(double retryAccuracy = -1)
     {
         SceneManager.Instance.AddUIBlockingWorldInput(SceneManager.UIBlockLevel.ForcedTutorial);
         annotationsguideline.StartRound(() =>
@@ -18,7 +18,7 @@ public class TutorialRound : MonoBehaviour
                 if (!result.passedTutorial)
                 {
                     Debug.Log("Restarting Tutorial");
-                    StartTutorialRound($"Da du nur eine Genauigkeit von {Math.Round(result.correctAnswerRate * 100)}% erreicht hast, kannst du noch nicht mit dem Spiel beginnen. Bitte lies dir den Annotationsleitfaden erneut genau durch, um falsche Annotationen zu vermeiden. Viel Erfolg beim nächsten Versuch.");
+                    StartTutorialRound(Math.Round(result.correctAnswerRate * 100));
                 }
                 else
                 {
@@ -26,6 +26,6 @@ public class TutorialRound : MonoBehaviour
                     SceneManager.Instance.RemoveUIBlockingWorldInput(SceneManager.UIBlockLevel.ForcedTutorial);
                 }
             }));
-        }, message);
+        }, retryAccuracy >= 0 ? "tutorial.retry_message" : "", retryAccuracy);
     }
 }

@@ -45,7 +45,7 @@ public class ButtonInput : MonoBehaviour
                                             GameStateManager.Instance.LoadGameStateString(success.gameState);
                                         }
                                     }, 
-                                    error => { errorDisplay.text = error; }));
+                                    error => { Debug.LogError(error); I18nText.SetText(errorDisplay, "login.failed"); }));
     }
 
     public void SignUpLoginClicked()
@@ -70,8 +70,8 @@ public class ButtonInput : MonoBehaviour
                             {
                                 GameStateManager.Instance.LoadGameStateString(success.gameState);
                             }
-                        }, error => { errorDisplay.text = "Login failed"; })); },
-                        error => { errorDisplay.text = "Names already taken"; }));
+                        }, error => { Debug.LogError(error); I18nText.SetText(errorDisplay, "login.failed"); })); },
+                        error => { Debug.LogError(error); I18nText.SetText(errorDisplay, "signup.names_taken"); }));
 
     }
 

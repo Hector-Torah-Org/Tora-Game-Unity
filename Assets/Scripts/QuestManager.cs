@@ -20,11 +20,17 @@ public class QuestManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        I18n.LanguageChanged += UpdateQuestText;
     }
 
     private void Start()
     {
         UpdateQuestText();
+    }
+
+    private void OnDestroy()
+    {
+        I18n.LanguageChanged -= UpdateQuestText;
     }
 
     public void SetSceneHint(string text)
@@ -73,12 +79,12 @@ public class QuestManager : MonoBehaviour
 
         if (!string.IsNullOrEmpty(sceneHint))
         {
-            output += sceneHint + "\n\n";
+            output += I18n.Translate(sceneHint) + "\n\n";
         }
 
         foreach (string quest in activeQuests)
         {
-            output += "- " + quest + "\n";
+            output += "- " + I18n.Translate(quest) + "\n";
         }
 
         QuestUI.Instance?.SetObjective(output);

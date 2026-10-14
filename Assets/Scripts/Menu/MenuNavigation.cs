@@ -4,7 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using UnityEngine.EventSystems;
 
 public class MenuNavigation : MonoBehaviour
@@ -21,10 +20,23 @@ public class MenuNavigation : MonoBehaviour
 
     private List<GameObject> history = new List<GameObject>();
 
+    private void Start()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        CreateWebGLControls();
+#endif
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M) && (sceneManager.uiLevelsBlockingWorldInput.Count == 0 || sceneManager.uiLevelsBlockingWorldInput[^1] <= SceneManager.UIBlockLevel.Menu))
+        if (Input.GetKeyDown(KeyCode.M))
+            ToggleMenu();
+    }
+
+    private void ToggleMenu()
+    {
+        if (sceneManager.uiLevelsBlockingWorldInput.Count == 0 || sceneManager.uiLevelsBlockingWorldInput[^1] <= SceneManager.UIBlockLevel.Menu)
         {
             if (ChestUI.Instance != null && ChestUI.Instance.IsOpen)
             {
@@ -34,6 +46,73 @@ public class MenuNavigation : MonoBehaviour
 
             GoBack();
         }
+    }
+
+    private void ToggleInventory()
+    {
+        Inventory inventory = FindFirstObjectByType<Inventory>();
+        if (inventory == null)
+        {
+            Debug.LogError("Cannot toggle inventory: no Inventory component was found.");
+            return;
+        }
+
+        inventory.Toggle();
+    }
+
+    private void CreateWebGLControls()
+    {
+        Canvas canvas = GetComponent<Canvas>();
+        if (canvas == null)
+        {
+            Debug.LogError("Cannot create WebGL controls: MenuNavigation must be attached to a Canvas.");
+            return;
+        }
+
+        CreateWebGLButton(canvas.transform, "M", new Vector2(-100f, -16f), ToggleMenu);
+        CreateWebGLButton(canvas.transform, "I", new Vector2(-16f, -16f), ToggleInventory);
+    }
+
+    private void CreateWebGLButton(Transform parent, string label, Vector2 anchoredPosition, UnityEngine.Events.UnityAction onClick)
+    {
+        GameObject buttonObject = new GameObject($"{label} Mobile Control", typeof(RectTransform), typeof(Image), typeof(Button));
+        RectTransform buttonTransform = buttonObject.GetComponent<RectTransform>();
+        buttonTransform.SetParent(parent, false);
+        buttonTransform.anchorMin = new Vector2(1f, 1f);
+        buttonTransform.anchorMax = new Vector2(1f, 1f);
+        buttonTransform.pivot = new Vector2(1f, 1f);
+        buttonTransform.anchoredPosition = anchoredPosition;
+        buttonTransform.sizeDelta = new Vector2(72f, 72f);
+
+        Image background = buttonObject.GetComponent<Image>();
+        background.color = new Color(0.12f, 0.12f, 0.12f, 0.78f);
+
+        Button button = buttonObject.GetComponent<Button>();
+        button.targetGraphic = background;
+        button.transition = Selectable.Transition.None;
+        button.navigation = new Navigation { mode = Navigation.Mode.None };
+        button.onClick.AddListener(() =>
+        {
+            EventSystem.current?.SetSelectedGameObject(null);
+            onClick();
+        });
+
+        GameObject textObject = new GameObject("Label", typeof(RectTransform), typeof(Text));
+        RectTransform textTransform = textObject.GetComponent<RectTransform>();
+        textTransform.SetParent(buttonTransform, false);
+        textTransform.anchorMin = Vector2.zero;
+        textTransform.anchorMax = Vector2.one;
+        textTransform.offsetMin = Vector2.zero;
+        textTransform.offsetMax = Vector2.zero;
+
+        Text text = textObject.GetComponent<Text>();
+        text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        text.text = label;
+        text.fontSize = 28;
+        text.fontStyle = FontStyle.Bold;
+        text.alignment = TextAnchor.MiddleCenter;
+        text.color = Color.white;
+        text.raycastTarget = false;
     }
 
     public void GoBack()

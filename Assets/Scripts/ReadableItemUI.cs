@@ -26,8 +26,8 @@ public class ReadableItemUI : MonoBehaviour
         if (item == null || !item.isReadable)
             return;
 
-        titleText.text = item.readableTitle;
-        bodyText.text = item.readableText;
+        I18nText.SetText(titleText, "item." + item.id + ".readable.title", item.readableTitle);
+        I18nText.SetText(bodyText, "readable.placeholder", item.readableText);
 
         inventoryPanel.SetActive(false);
         readingPanel.SetActive(true);

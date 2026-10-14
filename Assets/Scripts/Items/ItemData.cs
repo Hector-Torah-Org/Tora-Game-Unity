@@ -7,6 +7,11 @@ public class ItemData : ScriptableObject
     public string displayName;
     public Sprite icon;
 
+    public string LocalizedDisplayName
+    {
+        get { return I18n.Translate("item." + id + ".name", displayName); }
+    }
+
     [Header("Readable Item")]
     public bool isReadable = false;
 
@@ -14,4 +19,14 @@ public class ItemData : ScriptableObject
 
     [TextArea(10, 30)]
     public string readableText;
+
+    public string LocalizedReadableTitle
+    {
+        get { return I18n.Translate("item." + id + ".readable.title", readableTitle); }
+    }
+
+    public string LocalizedReadableText
+    {
+        get { return I18n.Translate("readable.placeholder", readableText); }
+    }
 }

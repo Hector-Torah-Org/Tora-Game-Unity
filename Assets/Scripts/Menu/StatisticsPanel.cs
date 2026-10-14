@@ -103,7 +103,7 @@ public class StatisticsPanel : MonoBehaviour
 
     public IEnumerator DrawGraph()
     {
-        YearText.text = year.ToString();
+        I18nText.SetLiteralText(YearText, year.ToString(I18n.CurrentCulture));
         if (!amountDataRaw.ContainsKey(year) || !confidenceDataRaw.ContainsKey(year))
         {
             Debug.Log("Starting to get data");
@@ -207,7 +207,7 @@ public class StatisticsPanel : MonoBehaviour
         context.painter2D.LineTo(new Vector2(x + width, y));
         context.painter2D.Stroke();
 
-        MaxAmountText.text = amountData.Max().ToString();
+        I18nText.SetLiteralText(MaxAmountText, amountData.Max().ToString(I18n.CurrentCulture));
 
     }
 }

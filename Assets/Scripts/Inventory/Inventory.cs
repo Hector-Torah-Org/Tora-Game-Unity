@@ -32,9 +32,14 @@ public class Inventory : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (isOpen) Close();
-            else Open();
+            Toggle();
         }
+    }
+
+    public void Toggle()
+    {
+        if (isOpen) Close();
+        else Open();
     }
 
     public void Open()
